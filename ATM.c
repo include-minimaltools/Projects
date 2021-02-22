@@ -46,11 +46,11 @@ void Start(void)
     }else{
         gotoxy(10,6);
         printf("Usuario : ");
-        cscanf("%s",&c1.user);
+        scanf("%s",&c1.user);
 
         gotoxy(10,8);
         printf("Contrase%ca : ",enye);
-        cscanf("%d",&c1.password);
+        scanf("%d",&c1.password);
 
         if (strcmp(c1.user,assigned.user)==0 && c1.password == assigned.password)
         {
@@ -155,7 +155,7 @@ void Menu(void)
 void Presentation(void)
 {
     clrscr();
-    printf("Gabriel Gay");
+    printf("Gabriel");
     getch();
     Menu();
 }
@@ -181,14 +181,6 @@ void Exit_Option(void)
     clrscr();
     printf("Hola numero 4");
     getch();
-}
-
-void RemoveCursor(int x, int y)
-{
-    textcolor(BLACK);
-    gotoxy(x,y);
-    cprintf("%c",219);
-    gotoxy(x,y);
 }
 
 void Exit(void)
