@@ -2,7 +2,5 @@
 
 void main()
 {
-    printf("Hola Mitch");
-
-    printf("Hola Dino");
+    print("Hola Buenas soy el dino de la mitchell");
 }
