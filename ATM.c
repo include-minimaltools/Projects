@@ -50,20 +50,12 @@ void Start(void)
         
         gotoxy(10, 6);
         printf("Usuario : ");
-<<<<<<< HEAD
         scanf("%s", &c1.user);
         gotoxy(10, 8);
         printf("Contrase%ca : ", enye);
         scanf("%d", &c1.password);
 
         /*fflush(stdin);*/
-=======
-        scanf("%s",&c1.user);
-
-        gotoxy(10,8);
-        printf("Contrase%ca : ",enye);
-        scanf("%d",&c1.password);
->>>>>>> 731f5c54f27fa59ad26888e020a59b4f55ee89ea
 
         if (strcmp(c1.user, assigned.user) == 0 && c1.password == assigned.password)
         {
@@ -196,7 +188,6 @@ void Exit_Option(void)
     getch();
 }
 
-<<<<<<< HEAD
 void RemoveCursor(int x, int y)
 {
     textcolor(BLACK);
@@ -205,8 +196,6 @@ void RemoveCursor(int x, int y)
     gotoxy(x, y);
 }
 
-=======
->>>>>>> 731f5c54f27fa59ad26888e020a59b4f55ee89ea
 void Exit(void)
 {
     clrscr();
