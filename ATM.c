@@ -1,3 +1,4 @@
+/**/
 #include <stdio.h>;
 #include <stdlib.h>;
 #include <conio.h>;
@@ -14,7 +15,7 @@ typedef struct
 {
     char user[MAX_SRTLN];
     int password;
-}accounts;
+} accounts;
 
 void Start(void);
 void Menu(void);
@@ -35,72 +36,76 @@ void main()
 void Start(void)
 {
     accounts assigned, c1;
-    strcpy(assigned.user,"luis");
+    strcpy(assigned.user, "luis");
     assigned.password = 1402;
 
     clrscr();
-    
-    if (RemainingAttemps == 0) 
+
+    if (RemainingAttemps == 0)
     {
         Exit();
-    }else{
-        gotoxy(10,6);
+    }
+    else
+    {
+        
+        gotoxy(10, 6);
         printf("Usuario : ");
-        cscanf("%s",&c1.user);
+        scanf("%s", &c1.user);
+        gotoxy(10, 8);
+        printf("Contrase%ca : ", enye);
+        scanf("%d", &c1.password);
 
-        gotoxy(10,8);
-        printf("Contrase%ca : ",enye);
-        cscanf("%d",&c1.password);
+        /*fflush(stdin);*/
 
-        if (strcmp(c1.user,assigned.user)==0 && c1.password == assigned.password)
+        if (strcmp(c1.user, assigned.user) == 0 && c1.password == assigned.password)
         {
             Menu();
-        }else if (strcmp(c1.user,assigned.user)==0 && c1.password != assigned.password)
+        }
+        else if (strcmp(c1.user, assigned.user) == 0 && c1.password != assigned.password)
         {
-            gotoxy(10,10);
-            printf("Contrase%ca Incorrecta",enye);
+            gotoxy(10, 10);
+            printf("Contrase%ca Incorrecta", enye);
             RemainingAttemps = RemainingAttemps - 1;
-            gotoxy(10,12);
-            printf("Le restan %d intentos",RemainingAttemps);
+            gotoxy(10, 12);
+            printf("Le restan %d intentos", RemainingAttemps);
             sleep(2);
             Start();
-        }else if (strcmp(c1.user,assigned.user)!=0 && c1.password == assigned.password)
+        }
+        else if (strcmp(c1.user, assigned.user) != 0 && c1.password == assigned.password)
         {
-            gotoxy(10,10);
+            gotoxy(10, 10);
             printf("Usuario Incorrecto");
             RemainingAttemps = RemainingAttemps - 1;
-            gotoxy(10,12);
-            printf("Le restan %d intentos",RemainingAttemps);
+            gotoxy(10, 12);
+            printf("Le restan %d intentos", RemainingAttemps);
             sleep(2);
             Start();
-        }else if (strcmp(c1.user,assigned.user)!=0 && c1.password != assigned.password)
+        }
+        else if (strcmp(c1.user, assigned.user) != 0 && c1.password != assigned.password)
         {
-            gotoxy(10,10);
-            printf("Usuario y Contrase%ca Incorrectos",enye);
+            gotoxy(10, 10);
+            printf("Usuario y Contrase%ca Incorrectos", enye);
             RemainingAttemps = RemainingAttemps - 1;
-            gotoxy(10,12);
-            printf("Le restan %d intentos",RemainingAttemps);
+            gotoxy(10, 12);
+            printf("Le restan %d intentos", RemainingAttemps);
             sleep(2);
             Start();
         }
-        }
+    }
 }
 
 void Menu(void)
 {
-    int i,tecla,opc,option = 1,exit = 0;
-    char *menu_options[] = {"Presentacion","Cajero ATM-UNI","Recargas Tigo-Claro","Salir","\0"};
-
+    int i, tecla = 0, opc, option = 1, exit = 0;
+    char *menu_options[] = {"Presentacion", "Cajero ATM-UNI", "Recargas Tigo-Claro", "Salir", "\0"};
     do
     {
         clrscr();
-        gotoxy(9,11 + option);
-        printf("-> ");
 
-        for(i = 0; i<4; i++)
+        for (i = 0; i < 4; i++)
         {
-            gotoxy(12,12 + i);
-            printf("%s",menu_options[i]);
+            gotoxy(10, 12 + i);
+            printf("%c %s",i+1 == option ? 16 : 0, menu_options[i]);
         }
 
         do
@@ -110,46 +115,46 @@ void Menu(void)
 
         switch (tecla)
         {
-        case up:
-            option--;
-            if (option < 1)
-            {
-                option=4;
-            }
-            break;
-        case down:
-            option++;
-            if (option > 4)
-            {
-                option=1;
-            }
-            break;
-        case enter:
-            exit=1;
-        default:
-            break;
+            case up:
+                option--;
+                if (option < 1)
+                {
+                    option = 4;
+                }
+                break;
+            case down:
+                option++;
+                if (option > 4)
+                {
+                    option = 1;
+                }
+                break;
+            case enter:
+                exit = 1;
+            default:
+                break;
         }
-    }while (exit == 0);
+    } while (exit == 0);
 
     opc = option;
 
     switch (opc)
-		{
-		case 1:
-			Presentation();
-			break;
-		case 2:
-			ATM();
-			break;
-		case 3:
-			Recargas();
-			break;
-		case 4:
-			Exit_Option();
-			break;
-		default:
-			break;
-		}
+    {
+    case 1:
+        Presentation();
+        break;
+    case 2:
+        ATM();
+        break;
+    case 3:
+        Recargas();
+        break;
+    case 4:
+        Exit_Option();
+        break;
+    default:
+        break;
+    }
 }
 
 void Presentation(void)
@@ -186,9 +191,9 @@ void Exit_Option(void)
 void RemoveCursor(int x, int y)
 {
     textcolor(BLACK);
-    gotoxy(x,y);
-    cprintf("%c",219);
-    gotoxy(x,y);
+    gotoxy(x, y);
+    cprintf("%c", 219);
+    gotoxy(x, y);
 }
 
 void Exit(void)
