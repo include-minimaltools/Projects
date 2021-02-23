@@ -68,7 +68,7 @@ void Start(void)
             RemainingAttemps = RemainingAttemps - 1;
             gotoxy(10, 12);
             printf("Le restan %d intentos", RemainingAttemps);
-            sleep(2);
+            getch();
             Start();
         }
         else if (strcmp(c1.user, assigned.user) != 0 && c1.password == assigned.password)
@@ -78,7 +78,7 @@ void Start(void)
             RemainingAttemps = RemainingAttemps - 1;
             gotoxy(10, 12);
             printf("Le restan %d intentos", RemainingAttemps);
-            sleep(2);
+            getch();
             Start();
         }
         else if (strcmp(c1.user, assigned.user) != 0 && c1.password != assigned.password)
@@ -88,7 +88,7 @@ void Start(void)
             RemainingAttemps = RemainingAttemps - 1;
             gotoxy(10, 12);
             printf("Le restan %d intentos", RemainingAttemps);
-            sleep(2);
+            getch();
             Start();
         }
     }
@@ -96,16 +96,21 @@ void Start(void)
 
 void Menu(void)
 {
-    int i, tecla = 0, opc, option = 1, exit = 0;
+    int i, opc, tecla = 0, option = 1, exit = 0;
     char *menu_options[] = {"Presentacion", "Cajero ATM-UNI", "Recargas Tigo-Claro", "Salir", "\0"};
+    int PosY[4] = {8,10,12,14}; 
     do
     {
         clrscr();
+		textcolor(BLUE);
+        gotoxy(30,6);
+        cprintf("MENU PRINCIPAL");
 
         for (i = 0; i < 4; i++)
         {
-            gotoxy(10, 12 + i);
-            printf("%c %s",i+1 == option ? 16 : 0, menu_options[i]);
+            textcolor(3+i);
+            gotoxy(28, PosY[i]);
+            cprintf("%c %s",i+1 == option ? 16 : 0, menu_options[i]);
         }
 
         do
@@ -159,16 +164,36 @@ void Menu(void)
 
 void Presentation(void)
 {
+    int i,j = 0;
+    char *Presentation_Elements[] = {"NOMBRE  :", "FECHA   :", "GRUPO   :", "PROFE   :", "CARRERA :","\0"};
+    char *Presentation_Complements[] = {"Luis Joseph","26/02/2021", "2M1-CO", "Alejandro Ortiz - Aliz","Ing. Computacion","\0"};
+
     clrscr();
-    printf("Gabriel");
+
+    textcolor(BLUE);
+    gotoxy(20,4);
+    cprintf("UNIVERSIDAD NACIONAL DE INGENIERIA - UNI");
+
+    for (i = 0; i < 5; i++)
+    {
+        textcolor(BLUE);
+        gotoxy(25, 8 + j);
+        cprintf("%s",Presentation_Elements[i]);
+        textcolor(CYAN);
+        gotoxy(35, 8 + j);
+        cprintf("%s",Presentation_Complements[i]);
+        j = j + 3;
+    }
+
     getch();
     Menu();
 }
 
 void ATM(void)
 {
+    char *Options[] = {"Ingresar"}
     clrscr();
-    printf("Hola numero 2");
+    printf("BIENVENIDO A ATM-UNI");
     getch();
     Menu();
 }
@@ -186,14 +211,6 @@ void Exit_Option(void)
     clrscr();
     printf("Hola numero 4");
     getch();
-}
-
-void RemoveCursor(int x, int y)
-{
-    textcolor(BLACK);
-    gotoxy(x, y);
-    cprintf("%c", 219);
-    gotoxy(x, y);
 }
 
 void Exit(void)
