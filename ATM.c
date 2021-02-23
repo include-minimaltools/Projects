@@ -25,13 +25,13 @@ void Recargas(void);
 void ATM(void);
 
 int RemainingAttemps = 3, Balance = 0;
-accounts assigned;
 
-strcpy(assigned.user, "luis");
-assigned.password = 1402;
+accounts assigned;
 
 void main()
 {
+    strcpy(assigned.user, "luis");
+    assigned.password = 1402;
     Start();
 }
 
@@ -240,13 +240,13 @@ void ATM(void)
     switch (opt)
     {
     case 1:
-        while (Deposit <= 0 && Deposit > 30000)
+        do
         {
             clrscr();
             fflush(stdin);
-            printf("Digite la cantidad a Depositar");
+            printf("Digite la cantidad a Depositar\n");
             scanf("%d", &Deposit);
-        }
+        } while (Deposit <= 0 || Deposit > 30000);
 
         Balance = Balance + Deposit;
 
@@ -261,12 +261,13 @@ void ATM(void)
             printf("No tiene saldo en la cuenta");
         }else
         {
-            while (Retirement == 0 && Retirement > Balance)
+            do 
             {
+                clrscr();
                 fflush(stdin);
-                printf("Digite la cantidad a Retirar");
+                printf("Digite la cantidad a Retirar\n");
                 scanf("%d", &Retirement);
-            }
+			}while (Retirement <= 0 || Retirement > Balance);
 
             Balance = Balance - Retirement;
 
@@ -301,29 +302,27 @@ void Recargas(void)
         getch();
     }else
     {
-        while(CellPhone_Number > 89999999 && CellPhone_Number < 55555555)
-        {
-            clrscr();
-            fflush(stdin);
-            printf("Ingrese su numero telefonico");
-            scanf("%li",&CellPhone_Number);
-        }
+        clrscr();
+        fflush(stdin);
+        printf("Ingrese su numero telefonico\n");
+        scanf("%ld",&CellPhone_Number);
 
         Four_Numbers = CellPhone_Number / 10000;
 
-        if (Four_Numbers > 5999)
-        {
-            strcpy(Company,"Tigo");
-            printf("Su numero %li es %s",CellPhone_Number,Company);
-            getch();
-        }else if (Four_Numbers > 7700)
+        if (Four_Numbers > 5500 && Four_Numbers < 5999)
         {
             strcpy(Company,"Claro");
-            printf("Su numero %li es %s",CellPhone_Number,Company);
+            printf("Su numero %ld es %s",CellPhone_Number,Company);
+            getch();
+        }else if (Four_Numbers > 7700 && Four_Numbers < 8700)
+        {
+            strcpy(Company,"Tigo");
+            printf("Su numero %ld es %s",CellPhone_Number,Company);
             getch();
         }else
         {
-            printf("Numero no encontrado");
+            printf("\nNumero no encontrado");
+            getch();
             Recargas();
         }
 
@@ -331,25 +330,27 @@ void Recargas(void)
         {
             clrscr();
             fflush(stdin);
-            printf("Ingrese la cantidad a recargar");
+            printf("Ingrese la cantidad a recargar\n");
             scanf("%d",&Amount_Entered);
 
             if (Amount_Entered > Balance)
             {
-                printf("La cantidad a recargar supera el saldo actual");
+                clrscr();
+                printf("La cantidad a recargar supera el saldo actual\n");
                 printf("Su saldo actual es : %d",Balance);
                 Amount_Entered = 0;
                 getch();
             }else if (Amount_Entered <= 0)
             {
-                printf("La cantidad a recargar es negativa o nula");
+                clrscr();
+                printf("La cantidad a recargar es negativa o nula\n");
                 printf("Su saldo actual es : %d",Balance);
                 Amount_Entered = 0;
                 getch();
             }else
             {
                 Balance = Balance - Amount_Entered;
-                printf("Se ha realizado la recarga con exito al numero %li de la compa%cia %s",CellPhone_Number,enye,Company);
+                printf("\nSe ha realizado la recarga con exito al numero %li de la compa%cia %s",CellPhone_Number,enye,Company);
                 getch();
             }
         }
