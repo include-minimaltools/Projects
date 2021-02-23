@@ -26,7 +26,7 @@ void Presentation(void);
 void Recargas(void);
 void ATM(void);
 
-int RemainingAttemps = 3;
+int RemainingAttemps = 3, Balance = 0;
 
 void main()
 {
@@ -122,17 +122,13 @@ void Menu(void)
         {
             case up:
                 option--;
-                if (option < 1)
-                {
+                if (option < 1) 
                     option = 4;
-                }
                 break;
             case down:
                 option++;
-                if (option > 4)
-                {
+                if (option > 4) 
                     option = 1;
-                }
                 break;
             case enter:
                 exit = 1;
@@ -184,19 +180,102 @@ void Presentation(void)
         cprintf("%s",Presentation_Complements[i]);
         j = j + 3;
     }
-
     getch();
     Menu();
 }
 
 void ATM(void)
 {
-    char *Options[] = {"Ingresar"}
-    clrscr();
-    printf("BIENVENIDO A ATM-UNI");
-    getch();
-    Menu();
-}
+    int i,opt,t = 0,option = 1, ex = 0;
+    int Deposit = 0, Retirement = 0;
+    char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"};
+
+    do
+    {
+        clrscr();
+
+        gotoxy(24, 6);
+        printf("BIENVENIDO A ATM-UNI");
+
+        for (i = 0; i < 4; i++)
+        {
+            gotoxy(24, 8 + i);
+            printf("%c %s",i + 1 == option ? 16 : 0,Options[i]);
+        }
+        
+        do
+        {
+            t = getch();
+        } while (t != up && t != down && t != enter);
+        
+        switch (t)
+        {
+        case up:
+            option--;
+            if (option < 1) 
+                option = 4;
+            break;
+        case down:
+            option++;
+            if (option > 4)
+                option = 1;
+            break;
+        case enter:
+            ex = 1;
+        default:
+            break;
+        }
+    } while (ex == 0);
+    
+    opt = option;
+
+    switch (opt)
+    {
+    case 1:
+        while (Deposit < 0 ││ Deposit > 30000)
+        {
+            clrscr();
+            printf("Digite la cantidad a Depositar");
+            scanf("%d", &Deposit);
+        }
+
+        Balance = Balance + Deposit;
+
+        printf("Se ha depositado correctamente la cantidad de C$%d netos",Deposit);
+        getch();
+        ATM();
+        break;
+    case 2:
+        if (Balance == 0)
+        {
+            clrscr();
+            printf("No tiene saldo en la cuenta");
+        }else
+        {
+            while (Retirement == 0 ││ Retirement > Balance)
+            {
+                printf("Digite la cantidad a Retirar");
+                scanf("%d", &Retirement);
+            }
+
+            Balance = Balance - Retirement;
+
+            printf("Se ha retirado correctamente la cantidad de C$%d netos",Retirement);
+        }
+        getch();
+        ATM();
+        break;
+    case 3:
+        clrscr();
+        printf("Su saldo es %d", Balance);
+        getch();
+        ATM();
+        break;
+    case 4:
+        Menu();
+    default:
+        break;
+    }}
 
 void Recargas(void)
 {
@@ -209,10 +288,9 @@ void Recargas(void)
 void Exit_Option(void)
 {
     clrscr();
-    printf("Hola numero 4");
+    printf("Fue un placer atenderle...");
     getch();
 }
-
 void Exit(void)
 {
     clrscr();
