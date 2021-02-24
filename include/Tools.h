@@ -25,8 +25,15 @@ string get_string(string message)
     char temp_string[80]={'\0'};
 
     cprintf("%s", message);
-    if(strcmp(message,"")==0)
-        message = " ";
+    if(strcmp(message,'\0')==0)
+    {
+        textcolor(WHITE);
+        clrscr();
+        cprintf("Error: Debe pasar un parametro a la funcion _getstring()");
+        getch();
+        exit(-1);
+    }
+        
         
     while (letter < MaxStrLn)
     {
