@@ -21,7 +21,7 @@ int charPassword = 42;
 
 string get_string(string message)
 {
-    string result = {'\0'};
+    string result;
     int letter = 0;
     char temp_string[80]={'\0'};
 
