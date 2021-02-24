@@ -1,8 +1,8 @@
-#include <stdio.h>;
-#include <stdlib.h>;
-#include <conio.h>;
-#include <dos.h>;
-#include <string.h>;
+#include <C:\\TC20\\include\\stdio.h>;
+#include <C:\\TC20\\include\\stdlib.h>;
+#include <C:\\TC20\\include\\conio.h>;
+#include <C:\\TC20\\include\\dos.h>;
+#include <C:\\TC20\\include\\string.h>;
 #include "C:\\TC20\\repos\\Projects\\include\\TOOLS.H"
 
 #define MAX_STRLN 256
