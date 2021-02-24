@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <BOOL.h>
+#include "c:\\TC20\\repos\\projects\\include\\STDBOOL.h"
 
 typedef char *string;
 
@@ -16,7 +16,7 @@ enum allowed_characters
 
 string get_string(char *message);
 
-int characters;
+int allowed_characters;
 bool isPassword;
 int MaxStrLn = 80;
 int MinStrLn = 2;
@@ -31,10 +31,9 @@ void main()
 
     clrscr();
 
-    cprintf("%i",getch());
-    getch();
-
-    text = get_string("");
+    isPassword = false;
+    charPassword = 4;
+    text = get_string("Escriba su nombre:");
 
     printf("\n");
     for(i=1; i<15; i++)
@@ -47,28 +46,27 @@ void main()
     getch();
 }
 
-string get_string(char *message)
+string get_string(string message)
 {
-    string text;
     int letter = 0;
     char temp_string[80]={'\0'};
 
-    printf("%s", message);
+    cprintf("%s", message);
     while (letter < MaxStrLn)
     {
         temp_string[letter] = getch();
 
-        if ((characters == LettersAndSymbols || characters == NumbersAndSymbols || characters == Alls) && letter < MaxStrLn - 1 && ((temp_string[letter] >= 33 && temp_string[letter] <= 47) || (temp_string[letter] >= 58 && temp_string[letter] <= 64) || (temp_string[letter] >= 91 && temp_string[letter] <= 96) || (temp_string[letter] >= 123 && temp_string[letter] <= 126)))
+        if ((allowed_characters == LettersAndSymbols || allowed_characters == NumbersAndSymbols || allowed_characters == Alls) && letter < MaxStrLn - 1 && ((temp_string[letter] >= 33 && temp_string[letter] <= 47) || (temp_string[letter] >= 58 && temp_string[letter] <= 64) || (temp_string[letter] >= 91 && temp_string[letter] <= 96) || (temp_string[letter] >= 123 && temp_string[letter] <= 126)))
         {
             cprintf("%c", isPassword ? charPassword : temp_string[letter]);
             letter++;
         }
-        else if ((characters == OnlyNumbers || characters == Alls) && letter < MaxStrLn - 1 && temp_string[letter] >= 48 && temp_string[letter] <= 57)
+        else if ((allowed_characters == OnlyNumbers || allowed_characters == Alls) && letter < MaxStrLn - 1 && temp_string[letter] >= 48 && temp_string[letter] <= 57)
         {
             cprintf("%c", isPassword ? charPassword : temp_string[letter]);
             letter++;
         }
-        else if ((characters == OnlyLetters || characters == LettersAndSymbols || characters == Alls) && letter < MaxStrLn - 1 && ((temp_string[letter] >= 65 && temp_string[letter] <= 90) || (temp_string[letter] >= 97 && temp_string[letter] <= 122) || (temp_string[letter] >= 48 && temp_string[letter] <= 57)))
+        else if ((allowed_characters == OnlyLetters || allowed_characters == LettersAndSymbols || allowed_characters == Alls) && letter < MaxStrLn - 1 && ((temp_string[letter] >= 65 && temp_string[letter] <= 90) || (temp_string[letter] >= 97 && temp_string[letter] <= 122) || (temp_string[letter] >= 48 && temp_string[letter] <= 57)))
         {
             cprintf("%c", isPassword ? charPassword : temp_string[letter]);
             letter++;
@@ -90,6 +88,6 @@ string get_string(char *message)
             break;
         }
     }
-    memcpy(text, temp_string, sizeof(temp_string));
-    return text;
+    strcpy(message, temp_string);
+    return message;
 }
