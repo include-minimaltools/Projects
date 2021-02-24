@@ -62,6 +62,6 @@ string get_string(string message)
             break;
         }
     }
-    strcpy(result, temp_string);
+    memcpy(result, temp_string);
     return result;
 }
