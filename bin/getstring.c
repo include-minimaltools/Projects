@@ -24,11 +24,18 @@ int charPassword = 42;
 
 void main()
 {
-    string text, text2, text3, text4;
+    string user, password;
     int i;
 
     clrscr();
 
+    user = get_string("\nUsuario: ");
+    password = get_string("\nContra: ");
+
+    printf("\n\nUsuario: %s  Contra:%s",user,password);
+
+
+/**
     text = get_string("\nEscriba su nombre: ");
     text2 = get_string("\nEscriba su apellido: ");
 
@@ -43,6 +50,7 @@ void main()
     if(strcmp(text2,text4)==0)
         printf("Su apellido es correcto");
 
+/**/
     getch();
 }
 

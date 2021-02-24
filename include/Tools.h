@@ -21,7 +21,6 @@ int charPassword = 42;
 
 string get_string(string message)
 {
-    string result;
     int letter = 0;
     char temp_string[80]={'\0'};
 
@@ -62,6 +61,6 @@ string get_string(string message)
             break;
         }
     }
-    memcpy(result, temp_string, sizeof(temp_string));
-    return result;
+    strcpy(message, temp_string);
+    return message;
 }

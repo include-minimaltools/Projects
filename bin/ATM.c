@@ -14,8 +14,8 @@
 
 typedef struct
 {
-    char user[MAX_STRLN];
-    char password[MAX_STRLN];
+    string user;
+    string password;
 } accounts;
 
 void Start(void);
@@ -34,8 +34,8 @@ accounts assigned;
 
 void main()
 {
-    strcpy(assigned.user, "luis");
-    strcpy(assigned.password, "2302");
+    assigned.user = "luis";
+    assigned.password = "2302";
     Start();
 }
 
@@ -55,29 +55,20 @@ void Start(void)
         textcolor(RED);
         gotoxy(18, 6);
         cprintf("Project IDEDIM - Inspirado DEl DIno de la Mitch :D");
+        gotoxy(18, 7);
 
         textcolor(BLUE);
         gotoxy(24, 10);
-        cprintf("Usuario : ");
-        scanf("%s",&c1.user);
-        /*isPassword = false;
-        MinStrLn = 2;
-        MaxStrLn = 6;
-        strcpy(c1.user,get_string("Usuario : "));*/
-
+        
+        c1.user = get_string("Usuario: ");
+        
         textcolor(BLUE);
         gotoxy(24, 14);
-        cprintf("Contrase%ca : ",enye);
-        scanf("%s",&c1.password);
-        /*isPassword = true;
-        MinStrLn = 4;
-        MaxStrLn = 7;
-		strcpy(c1.password,get_string("Contrasenia : "));
-
-        printf("\n\n\t\t%s %s",c1.user,c1.password);
-        printf("\n\n\t\t%s %s",assigned.user,assigned.password);
-        getch();*/
-
+        
+        c1.password = get_string("Contra: ");
+        
+        printf("\n\nUsuario: %s  Contra: %s",c1.user,c1.password);
+/**/
         if (strcmp(c1.user, assigned.user) == 0 && strcmp(c1.password, assigned.password) == 0)
         {
             Menu();
@@ -121,7 +112,9 @@ void Start(void)
             getch();
             Start();
         }
+        /**/
     }
+    
 }
 
 void Menu(void)
