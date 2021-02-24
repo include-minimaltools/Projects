@@ -24,24 +24,24 @@ int charPassword = 42;
 
 void main()
 {
-    string text;
+    string text, text2, text3, text4;
     int i;
-
-
 
     clrscr();
 
-    isPassword = false;
-    charPassword = 4;
-    text = get_string("Escriba su nombre:");
+    text = get_string("\nEscriba su nombre: ");
+    text2 = get_string("\nEscriba su apellido: ");
 
-    printf("\n");
-    for(i=1; i<15; i++)
-    {
-        gotoxy(1,1+i);
-        textcolor(i);
-        cputs(text);
-    }
+    printf("\n\nSu nombre es %s %s",text,text2);
+
+    text3 = get_string("\n\nEscriba su nombre nuevamente: ");
+    text4 = get_string("\n\nEscriba su apellido nuevamente: ");
+    
+    if(strcmp(text,text3)==0)
+        printf("Su nombre es correcto");
+
+    if(strcmp(text2,text4)==0)
+        printf("Su apellido es correcto");
 
     getch();
 }
