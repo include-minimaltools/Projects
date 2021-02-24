@@ -51,11 +51,10 @@ void Start(void)
         gotoxy(10, 6);
         printf("Usuario : ");
         scanf("%s", &c1.user);
+
         gotoxy(10, 8);
         printf("Contrase%ca : ", enye);
         scanf("%d", &c1.password);
-
-        /*fflush(stdin);*/
 
         if (strcmp(c1.user, assigned.user) == 0 && c1.password == assigned.password)
         {
@@ -65,9 +64,12 @@ void Start(void)
         {
             gotoxy(10, 10);
             printf("Contrase%ca Incorrecta", enye);
+
             RemainingAttemps = RemainingAttemps - 1;
+
             gotoxy(10, 12);
             printf("Le restan %d intentos", RemainingAttemps);
+
             getch();
             Start();
         }
@@ -75,9 +77,12 @@ void Start(void)
         {
             gotoxy(10, 10);
             printf("Usuario Incorrecto");
+
             RemainingAttemps = RemainingAttemps - 1;
+
             gotoxy(10, 12);
             printf("Le restan %d intentos", RemainingAttemps);
+
             getch();
             Start();
         }
@@ -85,9 +90,12 @@ void Start(void)
         {
             gotoxy(10, 10);
             printf("Usuario y Contrase%ca Incorrectos", enye);
+
             RemainingAttemps = RemainingAttemps - 1;
+
             gotoxy(10, 12);
             printf("Le restan %d intentos", RemainingAttemps);
+
             getch();
             Start();
         }
@@ -232,9 +240,10 @@ void ATM(void)
     switch (opt)
     {
     case 1:
-        while (Deposit < 0 ││ Deposit > 30000)
+        while (Deposit < 0 && Deposit > 30000)
         {
             clrscr();
+            fflush(stdin);
             printf("Digite la cantidad a Depositar");
             scanf("%d", &Deposit);
         }
@@ -252,8 +261,9 @@ void ATM(void)
             printf("No tiene saldo en la cuenta");
         }else
         {
-            while (Retirement == 0 ││ Retirement > Balance)
+            while (Retirement == 0 && Retirement > Balance)
             {
+                fflush(stdin);
                 printf("Digite la cantidad a Retirar");
                 scanf("%d", &Retirement);
             }
@@ -279,11 +289,70 @@ void ATM(void)
 
 void Recargas(void)
 {
-    clrscr();
-    printf("Hola numero 3");
-    getch();
-    Menu();
-}
+      int Amount_Entered = 0;
+    long int CellPhone_Number = 0;
+    float Four_Numbers = 0;
+    char Company[MAX_STRLN];
+
+    if (Balance == 0)
+    {
+        printf("No tiene saldo en la cuenta");
+        getch();
+    }else
+    {
+        while(CellPhone_Number > 89999999 && CellPhone_Number < 55555555)
+        {
+            clrscr();
+            fflush(stdin);
+            printf("Ingrese su numero telefonico");
+            scanf("%li",&CellPhone_Number);
+        }
+
+        Four_Numbers = CellPhone_Number / 10000;
+
+        if (Four_Number > 5999)
+        {
+            strcpy(Company,"Tigo");
+            printf("Su numero %li es %s",CellPhone_Number,Company);
+            getch();
+        }else if (Four_Number > 7700)
+        {
+            strcpy(Company,"Claro")
+            printf("Su numero %li es %s",CellPhone_Number,Company);
+            getch();
+        }else
+        {
+            printf("Numero no encontrado");
+            Recargas();
+        }
+
+        while(Amount_Entered == 0)
+        {
+            clrscr();
+            fflush(stdin);
+            printf("Ingrese la cantidad a recargar");
+            scanf("%d",&Amount_Entered);
+
+            if (Amount_Entered > Balance)
+            {
+                printf("La cantidad a recargar supera el saldo actual");
+                printf("Su saldo actual es : %d",Balance);
+                Amount_Entered = 0;
+                getch();
+            }else if (Amount_Entered <= 0)
+            {
+                printf("La cantidad a recargar es negativa o nula");
+                printf("Su saldo actual es : %d",Balance);
+                Amount_Entered = 0;
+                getch();
+            }else
+            {
+                printf("Se ha realizado la recarga con exito al numero %li de la compa%cia %s",CellPhone_Number,enye,Company);
+            }
+        }
+    }
+    Menu();}
+
 
 void Exit_Option(void)
 {
@@ -291,7 +360,7 @@ void Exit_Option(void)
     printf("Fue un placer atenderle...");
     getch();
 }
-void Exit(void)
+oid Exit(void)
 {
     clrscr();
     printf("Ha agotado sus 3 intentos\n");
