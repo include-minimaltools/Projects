@@ -25,6 +25,9 @@ string get_string(string message)
     char temp_string[80]={'\0'};
 
     cprintf("%s", message);
+    if(strcmp(message,"")==0)
+        message = " ";
+        
     while (letter < MaxStrLn)
     {
         temp_string[letter] = getch();
