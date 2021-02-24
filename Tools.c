@@ -1,191 +1,91 @@
-/* Herramientas para trabajo de strings en modo texto */
-
-#include <stdio.h>;
-#include <stdlib.h>;
-#include <conio.h>;
-#include <dos.h>;
-#include <string.h>;
+#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
 #include <BOOL.h>
-
 
 #define maxStrLen 10
 
-struct
+typedef char * string;
+
+enum allowed_characters 
 {
-    bool isPassword;
-	bool allowLetters;
-    bool allowNumbers;
-    bool allowSymbols;
-    
-} String;
+    Alls,
+    OnlyNumbers,
+    OnlyLetters,
+    LettersAndSymbols,
+    NumbersAndSymbols
+};
 
+string get_string(char *message);
 
-void getstring(char string[]);
+int characters;
+bool isPassword;
+int MaxStrLn = 20;
+int MinStrLn = 2;
 
 void main()
 {
-    char text[maxStrLen];
+    string text;
 
     clrscr();
+    text = get_string("");
 
-    String.allowLetters = false;
-    String.allowSymbols = true;
+    printf("\n\n%s",text);
 
-    gotoxy(10,1);
-    textcolor(LIGHTBLUE);
-    textbackground(WHITE);
-    getstring(text);
-
-    clrscr();
-    printf("%s",text);
+    getch();
 }
 
-void getstring(char string[])
+string get_string(char *message)
 {
+    string text;
     int letter = 0;
+    char temp_string[maxStrLen];
+    printf("%s",message);
     while (letter < maxStrLen)
     {
+        temp_string[letter] = getch();
 
-        string[letter] = getch();
-
-        if (String.allowSymbols == true && letter < maxStrLen-1 && ((string[letter] >= 33 && string[letter] <= 47) || (string[letter] >= 58 && string[letter] <= 64) || (string[letter] >= 91  && string[letter] <= 96) || (string[letter] >= 123 && string[letter] <= 126)))
+        if ((characters == LettersAndSymbols || characters == NumbersAndSymbols || characters == Alls) && letter < maxStrLen-1 && ((temp_string[letter] >= 33 && temp_string[letter] <= 47) || (temp_string[letter] >= 58 && temp_string[letter] <= 64) || (temp_string[letter] >= 91  && temp_string[letter] <= 96) || (temp_string[letter] >= 123 && temp_string[letter] <= 126)))
         {
-            if(String.isPassword)
+            if(isPassword)
                 cprintf("*");
             else
-                cprintf("%c",string[letter]);
+                cprintf("%c",temp_string[letter]);
 
             letter++;
         }
-        else if (string[letter] >= 48 && string[letter] <= 57 && letter < maxStrLen-1 && String.allowNumbers == true)
+        else if ((characters == OnlyNumbers || characters == Alls) && letter < maxStrLen-1  && temp_string[letter] >= 48 && temp_string[letter] <= 57)
         {
-            if(String.isPassword)
+            if(isPassword)
                 cprintf("*");
             else
-                cprintf("%c",string[letter]);
+                cprintf("%c",temp_string[letter]);
 
             letter++;
         }
-        else if (((string[letter]>=65 && string[letter]<=90) || (string[letter]>=97 && string[letter]<=122) || (string[letter]>=48 && string[letter]<=57)) && letter < maxStrLen-1 && String.allowLetters == true)
+        else if ((characters == OnlyLetters || characters == LettersAndSymbols || characters == Alls) && letter < maxStrLen-1 && ((temp_string[letter]>=65 && temp_string[letter]<=90) || (temp_string[letter]>=97 && temp_string[letter]<=122) || (temp_string[letter]>=48 && temp_string[letter]<=57)))
         {
-            if(String.isPassword)
+            if(isPassword)
                 cprintf("*");
             else
-                cprintf("%c",string[letter]);
+                cprintf("%c",temp_string[letter]);
 
             letter++;
         }
-        else if(string[letter]==8 && letter>0)
+        else if(temp_string[letter]==8 && letter > 0)
         {
-            string[letter]='\0';
+            temp_string[letter]='\0';
             cprintf("\b%c\b",0);
             letter-=1;
         }
-        else if(string[letter]==13||string[letter]==27)
+        else if(temp_string[letter]==13 && letter >= MinStrLn)
         {
-            string[letter]='\0';
+            temp_string[letter]='\0';
             break;
         }
+
     }
+
+    memcpy(text,temp_string,sizeof(temp_string));
+    return text;
 }
-
-/**/
-/*funciones viejas *
-
-void getString(int x, int y, int isPassword,char string[MaxStrLn])
-{   
-    int i;
-
-    for(i=0;i<MaxStrLn;i++)
-        string[i]='\0';
-    
-    i=0;
-    while(i<MaxStrLn-1)
-    {
-        gotoxy(x+i,y);
-        do
-            string[i] = getch();
-        while((string[i]<65 || string[i]>90) && (string[i]<97 || string[i]>122) && string[i]!=13 && string[i]!=8 && string[i]!=27);
-
-        if((string[i]>=65 && string[i]<=90) || (string[i]>=97 && string[i]<=122) || (string[i]>=48 && string[i]<=57))
-        {
-            if(isPassword)
-                cprintf("%c",42);
-            else
-                cprintf("%c",string[i]);
-
-            i++;
-        }
-        else if(string[i]==8 && i>0)
-        {
-            string[i]='\0';
-            gotoxy(x+i-1,y);
-            cprintf("%c",0);
-            i-=1;
-        }
-        else if(string[i]==13||string[i]==27)
-        {
-            string[i]='\0';
-            break;
-        }
-            
-    }
-}
-
-/*La que use para las letras --Mitch*/
-
-void validando(char validar[], int x, int y)
-{ //Ingrese su nombre:
-    char Reciv_tecla = ' ';
-    int i = 0;
-    fflush(stdin);
-    textcolor(WHITE);
-VAL:
-    fflush(stdin);
-    gotoxy(x, y);
-    clreol();
-    for (i = 0; i < 17; i++)
-    {
-        validar[i] = ' ';
-    } 
-    i = 0;
-llenar:
- 
-    while (Reciv_tecla = getch())
-    {
-
-        if (Reciv_tecla > 64 && Reciv_tecla < 91 && i < 16 || Reciv_tecla > 96 && Reciv_tecla < 123 && i < 16)
-        {
-            Reciv_tecla = toupper(Reciv_tecla);
-            validar[i] = Reciv_tecla;
-            cprintf("%c", validar[i]);
-            i++;
-            goto llenar;
-        }
-        if (Reciv_tecla == '\b')
-        {
-            goto VAL;
-        }
-        if (i == 2 && Reciv_tecla == '\r')
-        {
-            goto VAL;
-        }
-        if (i < 2 && Reciv_tecla == '\r')
-        {
-            goto VAL;
-        }
-        if (i > 2 && i < 17 && Reciv_tecla == '\r')//-------Si todo esta bien 
-        {
-            validar[i] = '\0';
-            break;
-        }
-    } 
-    if (validar[i] == '\0')
-    {
-    }
-    else
-    {
-        goto VAL;
-    }
-}
-/**/

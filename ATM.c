@@ -1,11 +1,10 @@
-/**/
 #include <stdio.h>;
 #include <stdlib.h>;
 #include <conio.h>;
 #include <dos.h>;
 #include <string.h>;
 
-#define MAX_SRTLN 256
+#define MAX_STRLN 256
 #define enye 164
 #define up 72
 #define down 80
@@ -13,13 +12,12 @@
 
 typedef struct
 {
-    char user[MAX_SRTLN];
+    char user[MAX_STRLN];
     int password;
 } accounts;
 
 void Start(void);
 void Menu(void);
-void RemoveCursor(int x, int y);
 void Exit(void);
 void Exit_Option(void);
 void Presentation(void);
@@ -27,6 +25,10 @@ void Recargas(void);
 void ATM(void);
 
 int RemainingAttemps = 3, Balance = 0;
+accounts assigned;
+
+strcpy(assigned.user, "luis");
+assigned.password = 1402;
 
 void main()
 {
@@ -35,9 +37,7 @@ void main()
 
 void Start(void)
 {
-    accounts assigned, c1;
-    strcpy(assigned.user, "luis");
-    assigned.password = 1402;
+    accounts c1;
 
     clrscr();
 
@@ -240,7 +240,7 @@ void ATM(void)
     switch (opt)
     {
     case 1:
-        while (Deposit < 0 && Deposit > 30000)
+        while (Deposit <= 0 && Deposit > 30000)
         {
             clrscr();
             fflush(stdin);
@@ -289,13 +289,14 @@ void ATM(void)
 
 void Recargas(void)
 {
-      int Amount_Entered = 0;
+    int Amount_Entered = 0;
     long int CellPhone_Number = 0;
     float Four_Numbers = 0;
     char Company[MAX_STRLN];
 
     if (Balance == 0)
     {
+        clrscr();
         printf("No tiene saldo en la cuenta");
         getch();
     }else
@@ -310,14 +311,14 @@ void Recargas(void)
 
         Four_Numbers = CellPhone_Number / 10000;
 
-        if (Four_Number > 5999)
+        if (Four_Numbers > 5999)
         {
             strcpy(Company,"Tigo");
             printf("Su numero %li es %s",CellPhone_Number,Company);
             getch();
-        }else if (Four_Number > 7700)
+        }else if (Four_Numbers > 7700)
         {
-            strcpy(Company,"Claro")
+            strcpy(Company,"Claro");
             printf("Su numero %li es %s",CellPhone_Number,Company);
             getch();
         }else
@@ -347,20 +348,25 @@ void Recargas(void)
                 getch();
             }else
             {
+                Balance = Balance - Amount_Entered;
                 printf("Se ha realizado la recarga con exito al numero %li de la compa%cia %s",CellPhone_Number,enye,Company);
+                getch();
             }
         }
     }
-    Menu();}
-
+    Menu();
+}
 
 void Exit_Option(void)
 {
     clrscr();
-    printf("Fue un placer atenderle...");
+    printf("Fue un placer atenderle...\n");
+    printf("Hacer su transacción aqui es seguro, rapido y sencillo\n");
+    printf("Le esperamos nuevamente :D "),
     getch();
 }
-oid Exit(void)
+
+void Exit(void)
 {
     clrscr();
     printf("Ha agotado sus 3 intentos\n");
