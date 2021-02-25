@@ -29,7 +29,7 @@ void Remove_Cursor(int x, int y);
 void Frame(int lineas);
 
 int RemainingAttemps = 3;
-float Balance = 0, Dolar_Value = 35.23;
+float Balance = 0, Dolar_Value = 35.07;
 
 accounts assigned;
 
