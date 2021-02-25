@@ -1,33 +1,44 @@
-#include<conio.h> /*aaaammmmmmm seguro estas compilando asi que F xD*/
+#include<conio.h>
 #include <stdio.h>
-#define max 7
 /*todo que escriba el mensaje a mostrar y luego uq le permita ingresar su numero*/ 
 typedef char *string;
-int get_int();
+
+int get_int(string message);
+
 int main()
 {
-    
     int recive = 0;
     clrscr();
    
-    recive = get_int("Ingrese un numero: ");
-    
+    recive = get_int("Ingrese su numero: ");
+
+   /* ------Para confirmar la conversion de valor
+   printf("\nEste es el nuevo %d",recive);
+    getch();
+    */
     return 0;    
 }
 int get_int(string message)
 {
+    int max = 6;
     char assistant = ' ';
-    int i = 0;
+    int i = 0; 
     int intiger = 0;
-    char hold_intiger[max];
+    char hold_intiger[6];
 
     cprintf("%s", message);
+    
 
     fflush(stdin);
     textcolor(WHITE);
-    
-    while(assistant=getch())
+    /*---------------Ciclo infinito------------*/
+    //-32768 a 32767 Alcande del int 
+    // si es positivo el arreglo tendra dimension de cinco y si es negativo 6
+   //ya esta lo de las direccionales, la conversion , falta hacer que si es negativo no le deje poner un cero, 
+    for (;;)
     {
+        assistant = getch();
+
         if (assistant> 47 && assistant < 58 && i < max) 
         {
             hold_intiger[i] = assistant;
@@ -61,7 +72,4 @@ int get_int(string message)
     }
     intiger = atoi(hold_intiger);
     return intiger; 
-}
-
-
-
+}   

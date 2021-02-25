@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "dos.h": "c"
+        "dos.h": "c",
+        "Form.C": "cpp"
     }
 }
