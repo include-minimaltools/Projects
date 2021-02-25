@@ -222,6 +222,7 @@ void ATM(void)
     int i,opt,t = 0,option = 1, ex = 0;
     int Deposit = 0, Retirement = 0, PosY[4] = {10,12,14,16};
     char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"};
+    string M;
 
     do
     {
