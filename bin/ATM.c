@@ -62,13 +62,11 @@ void Start(void)
         textcolor(BLUE);
         gotoxy(24, 10);
         cprintf("Usuario : ");
-        textcolor(WHITE);
         scanf("%s", &c1.user);
 
         textcolor(BLUE);
         gotoxy(24, 14);
         cprintf("Contrase%ca : ", enye);
-        textcolor(WHITE);
         scanf("%d", &c1.password);
 
         if (strcmp(c1.user, assigned.user) == 0 && c1.password == assigned.password)
@@ -77,40 +75,40 @@ void Start(void)
         }
         else if (strcmp(c1.user, assigned.user) == 0 && c1.password != assigned.password)
         {
+            textcolor(WHITE);
             gotoxy(24, 17);
-            printf("Contrase%ca Incorrecta", enye);
+            cprintf("Contrase%ca Incorrecta", enye);
 
             RemainingAttemps = RemainingAttemps - 1;
 
             gotoxy(24, 19);
-            printf("Le restan %d intentos", RemainingAttemps);
-            Remove_Cursor(4,4);
+            cprintf("Le restan %d intentos", RemainingAttemps);
             getch();
             Start();
         }
         else if (strcmp(c1.user, assigned.user) != 0 && c1.password == assigned.password)
         {
+            textcolor(WHITE);
             gotoxy(24, 17);
-            printf("Usuario Incorrecto");
+            cprintf("Usuario Incorrecto");
 
             RemainingAttemps = RemainingAttemps - 1;
 
             gotoxy(24, 19);
-            printf("Le restan %d intentos", RemainingAttemps);
-            Remove_Cursor(4,4);
+            cprintf("Le restan %d intentos", RemainingAttemps);
             getch();
             Start();
         }
         else if (strcmp(c1.user, assigned.user) != 0 && c1.password != assigned.password)
         {
+            textcolor(WHITE);
             gotoxy(24, 17);
-            printf("Usuario y Contrase%ca Incorrectos", enye);
+            cprintf("Usuario y Contrase%ca Incorrectos", enye);
 
             RemainingAttemps = RemainingAttemps - 1;
 
             gotoxy(24, 19);
-            printf("Le restan %d intentos", RemainingAttemps);
-            Remove_Cursor(4,4);
+            cprintf("Le restan %d intentos", RemainingAttemps);
             getch();
             Start();
         }
@@ -136,8 +134,6 @@ void Menu(void)
             gotoxy(28, PosY[i]);
             cprintf("%c %s",i+1 == option ? 16 : 0, menu_options[i]);
         }
-
-        Remove_Cursor(4,4);
 
         do
         {
@@ -207,8 +203,6 @@ void Presentation(void)
         j = j + 3;
     }
 
-    Remove_Cursor(4,4);
-
     getch();
     Menu();
 }
@@ -233,8 +227,6 @@ void ATM(void)
             gotoxy(28, PosY[i]);
             cprintf("%c %s",i + 1 == option ? 16 : 0,Options[i]);
         }
-        
-        Remove_Cursor(4,4);
 
         do
         {
@@ -268,7 +260,7 @@ void ATM(void)
         do
         {
             clrscr();
-            fflush(stdin);
+            textcolor(BLUE);
             printf("Digite la cantidad a Depositar\n");
             printf("C$ ");
             scanf("%d", &Deposit);
@@ -276,7 +268,8 @@ void ATM(void)
 
         Balance = Balance + Deposit;
 
-        printf("Se ha depositado correctamente la cantidad de C$ %d netos",Deposit);
+        textcolor(WHITE);
+        cprintf("\nSe ha depositado correctamente la cantidad de C$ %d netos",Deposit);
         getch();
         ATM();
         break;
@@ -284,13 +277,15 @@ void ATM(void)
         if (Balance == 0)
         {
             clrscr();
-            printf("No tiene saldo en la cuenta");
+            textcolor(BLUE);
+            cprintf("No tiene saldo en la cuenta");
         }else
         {
             do 
             {
                 clrscr();
                 fflush(stdin);
+                textcolor(BLUE);
                 printf("Digite la cantidad a Retirar\n");
                 printf("C$ ");
                 scanf("%d", &Retirement);
@@ -298,14 +293,15 @@ void ATM(void)
 
             Balance = Balance - Retirement;
 
-            printf("\nSe ha retirado correctamente la cantidad de C$ %d netos",Retirement);
+            cprintf("\nSe ha retirado correctamente la cantidad de C$ %d netos",Retirement);
         }
         getch();
         ATM();
         break;
     case 3:
         clrscr();
-        printf("Su saldo es C$ %d", Balance);
+        textcolor(BLUE);
+        cprintf("Su saldo es C$ %d", Balance);
         getch();
         ATM();
         break;
@@ -324,8 +320,9 @@ void Recargas(void)
 
     if (Balance == 0)
     {
+        textcolor(BLUE);
         clrscr();
-        printf("No tiene saldo en la cuenta");
+        cprintf("No tiene saldo en la cuenta");
         getch();
     }else
     {
