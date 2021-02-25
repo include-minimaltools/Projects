@@ -59,16 +59,18 @@ void Start(void)
 
         textcolor(BLUE);
         gotoxy(24, 10);
-        
+        MinStrLn = 2;
+        MaxStrLn = 7;
+        isPassword = false;
         c1.user = get_string("Usuario: ");
         
         textcolor(BLUE);
         gotoxy(24, 14);
-        
+        MinStrLn = 3;
+        MaxStrLn = 6;
+        isPassword = true;
         c1.password = get_string("Contra: ");
-        
-        printf("\n\nUsuario: %s  Contra: %s",c1.user,c1.password);
-/**/
+
         if (strcmp(c1.user, assigned.user) == 0 && strcmp(c1.password, assigned.password) == 0)
         {
             Menu();
@@ -112,7 +114,6 @@ void Start(void)
             getch();
             Start();
         }
-        /**/
     }
     
 }
@@ -131,7 +132,7 @@ void Menu(void)
         gotoxy(5,3);
         cprintf("Usuario : %s",assigned.user);
         gotoxy(5,4);
-        cprintf("Saldo : %d",Balance);
+        cprintf("Saldo : C$ %d",Balance);
 
 		textcolor(BLUE);
         gotoxy(30,7);
@@ -230,9 +231,6 @@ void ATM(void)
         textcolor(RED);
         gotoxy(5,3);
         cprintf("Usuario : %s",assigned.user);
-
-        gotoxy(5,4);
-        cprintf("Saldo : %d",Balance);
 
         textcolor(4);
         gotoxy(28, 7);
