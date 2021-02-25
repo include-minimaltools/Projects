@@ -1,9 +1,30 @@
+/*************************************/
+/* Definir las librerias necesarias  */
+/* el funcionamiento correcto de la  */
+/* libreria                          */
+/*************************************/
 #ifndef stdbool.h
 #include "c:\\TC20\\repos\\projects\\include\\STDBOOL.h"
 #endif
+#ifndef stdio.h
+#include "c:\\TC20\\include\\stdio.h"
+#endif
+#ifndef string.h
+#include "c:\\TC20\\include\\string.h"
+#endif
+#ifndef conio.h
+#include "c:\\TC20\\include\\conio.h"
+#endif
 
+/*************************************/
+/*Definir strings como tipos de datos*/
+/*************************************/
 typedef char *string;
 
+
+/*************************************/
+/*      Caracteres restringidos      */
+/*************************************/
 enum allowed_characters
 {
     Alls,
@@ -13,12 +34,21 @@ enum allowed_characters
     NumbersAndSymbols
 };
 
+/*************************************/
+/*  Variables globales para la       */
+/*  configuracion del get_string     */
+/*************************************/
 int allowed_characters;
 bool isPassword;
 int MaxStrLn = 80;
 int MinStrLn = 2;
 int charPassword = 42;
 
+/*************************************/
+/*  Obtiene un string ingresado por  */
+/*  el usuario e imprime un mensaje  */
+/*  al momento de pedirlo            */
+/*************************************/
 string get_string(string message)
 {
     int letter = 0;
