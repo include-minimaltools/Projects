@@ -3,9 +3,7 @@
 #include <conio.h>;
 #include <dos.h>;
 #include <string.h>;
-/*#include "C:\TC20\REM\Projects\include\TOOLS.H"*/
-
-/*Arreglar el ingresar saldo ATM_UNI*/
+#include "C:\\TC20\\repos\\Projects\\include\\TOOLS.H"
 
 #define MAX_STRLN 256
 #define enye 164
@@ -17,7 +15,7 @@
 typedef struct
 {
     char user[MAX_STRLN];
-    int password;
+    char password[MAX_STRLN];
 } accounts;
 
 void Start(void);
@@ -37,7 +35,7 @@ accounts assigned;
 void main()
 {
     strcpy(assigned.user, "luis");
-    assigned.password = 2302;
+    strcpy(assigned.password, "2302");
     Start();
 }
 
@@ -54,7 +52,6 @@ void Start(void)
     else
     {
         Frame(1);
-
         textcolor(RED);
         gotoxy(18, 6);
         cprintf("Project IDEDIM - Inspirado DEl DIno de la Mitch :D");
@@ -62,18 +59,30 @@ void Start(void)
         textcolor(BLUE);
         gotoxy(24, 10);
         cprintf("Usuario : ");
-        scanf("%s", &c1.user);
+        scanf("%s",&c1.user);
+        /*isPassword = false;
+        MinStrLn = 2;
+        MaxStrLn = 6;
+        strcpy(c1.user,get_string("Usuario : "));*/
 
         textcolor(BLUE);
         gotoxy(24, 14);
-        cprintf("Contrase%ca : ", enye);
-        scanf("%d", &c1.password);
+        cprintf("Contrase%ca : ",enye);
+        scanf("%s",&c1.password);
+        /*isPassword = true;
+        MinStrLn = 4;
+        MaxStrLn = 7;
+		strcpy(c1.password,get_string("Contrasenia : "));
 
-        if (strcmp(c1.user, assigned.user) == 0 && c1.password == assigned.password)
+        printf("\n\n\t\t%s %s",c1.user,c1.password);
+        printf("\n\n\t\t%s %s",assigned.user,assigned.password);
+        getch();*/
+
+        if (strcmp(c1.user, assigned.user) == 0 && strcmp(c1.password, assigned.password) == 0)
         {
             Menu();
         }
-        else if (strcmp(c1.user, assigned.user) == 0 && c1.password != assigned.password)
+        else if (strcmp(c1.user, assigned.user) == 0 && strcmp(c1.password, assigned.password) != 0)
         {
             textcolor(WHITE);
             gotoxy(24, 17);
@@ -86,7 +95,7 @@ void Start(void)
             getch();
             Start();
         }
-        else if (strcmp(c1.user, assigned.user) != 0 && c1.password == assigned.password)
+        else if (strcmp(c1.user, assigned.user) != 0 && strcmp(c1.password, assigned.password) == 0)
         {
             textcolor(WHITE);
             gotoxy(24, 17);
@@ -99,7 +108,7 @@ void Start(void)
             getch();
             Start();
         }
-        else if (strcmp(c1.user, assigned.user) != 0 && c1.password != assigned.password)
+        else if (strcmp(c1.user, assigned.user) != 0 && strcmp(c1.password, assigned.password) != 0)
         {
             textcolor(WHITE);
             gotoxy(24, 17);
@@ -124,6 +133,13 @@ void Menu(void)
     {
         clrscr();
         Frame(1);
+
+        textcolor(RED);
+        gotoxy(5,3);
+        cprintf("Usuario : %s",assigned.user);
+        gotoxy(5,4);
+        cprintf("Saldo : %d",Balance);
+
 		textcolor(BLUE);
         gotoxy(30,7);
         cprintf("MENU PRINCIPAL");
@@ -217,6 +233,14 @@ void ATM(void)
     {
         clrscr();
         Frame(1);
+
+        textcolor(RED);
+        gotoxy(5,3);
+        cprintf("Usuario : %s",assigned.user);
+
+        gotoxy(5,4);
+        cprintf("Saldo : %d",Balance);
+
         textcolor(4);
         gotoxy(28, 7);
         cprintf("BIENVENIDO A ATM-UNI");
