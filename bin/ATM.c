@@ -28,7 +28,8 @@ void ATM(void);
 void Remove_Cursor(int x, int y);
 void Frame(int lineas);
 
-int RemainingAttemps = 3, Balance = 0;
+int RemainingAttemps = 3;
+float Balance = 0, Dolar_Value = 35.23;
 
 accounts assigned;
 
@@ -53,8 +54,8 @@ void Start(void)
     {
         Frame(1);
         textcolor(RED);
-        gotoxy(18, 6);
-        cprintf("Project IDEDIM - Inspirado DEl DIno de la Mitch :D");
+        gotoxy(19, 6);
+        cprintf("Project Bank's Avanced Register - BAR :D");
         gotoxy(18, 7);
 
         textcolor(BLUE);
@@ -132,7 +133,7 @@ void Menu(void)
         gotoxy(5,3);
         cprintf("Usuario : %s",assigned.user);
         gotoxy(5,4);
-        cprintf("Saldo : C$ %d",Balance);
+        cprintf("Saldo : C$ %0.2f",Balance);
 
 		textcolor(BLUE);
         gotoxy(30,7);
@@ -221,8 +222,7 @@ void ATM(void)
 {
     int i,opt,t = 0,option = 1, ex = 0;
     int Deposit = 0, Retirement = 0, PosY[4] = {10,12,14,16};
-    char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"};
-    string M;
+    char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"}, M;
 
     do
     {
@@ -276,16 +276,44 @@ void ATM(void)
         do
         {
             clrscr();
-            textcolor(BLUE);
-            printf("Digite la cantidad a Depositar\n");
-            printf("C$ ");
-            scanf("%d", &Deposit);
-        } while (Deposit <= 0 || Deposit > 30000);
+            printf("Elija la moneda a depositar\n\n");
+            printf("C-Cordobas        D-Dolares\n\n");
+            scanf("%s",&M);
+        }while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
 
-        Balance = Balance + Deposit;
+        if (strcmp(M,'D')==0 || strcmp(M,'d')==0)
+        {
+            do
+            {
+                clrscr();      
+                printf("Digite la cantidad a depositar en Dolares ($) netos\n");
+                printf("$ ");
+                scanf("%d", &Deposit);
+			}while (Deposit <= 0 || Deposit > 2000);
 
-        textcolor(WHITE);
-        cprintf("\nSe ha depositado correctamente la cantidad de C$ %d netos",Deposit);
+            Balance = Balance + (Deposit * Dolar_Value);
+
+            textcolor(WHITE);
+            cprintf("\nSe ha depositado correctamente la cantidad de $ %d netos",Deposit);
+            printf("\n\nCambio Actual del Dolar a Cordobas : %0.2f",Dolar_Value);
+        }
+
+        if (strcmp(M,'C')==0 || strcmp(M,'c')==0)
+        {
+            do
+            {
+                clrscr();      
+                printf("Digite la cantidad a depositar en cordobas (C$) netos\n");
+                printf("C$ ");
+                scanf("%d", &Deposit);
+			}while (Deposit <= 0 || Deposit > 30000);
+
+            Balance = Balance + Deposit;
+
+            textcolor(WHITE);
+            cprintf("\nSe ha depositado correctamente la cantidad de C$ %d netos",Deposit);
+        }
+
         getch();
         ATM();
         break;
@@ -317,7 +345,7 @@ void ATM(void)
     case 3:
         clrscr();
         textcolor(BLUE);
-        cprintf("Su saldo es C$ %d", Balance);
+        cprintf("Su saldo es C$ %0.2f", Balance);
         getch();
         ATM();
         break;
@@ -378,14 +406,14 @@ void Recargas(void)
             {
                 clrscr();
                 printf("La cantidad a recargar supera el saldo actual\n");
-                printf("Su saldo actual es : C$ %d",Balance);
+                printf("Su saldo actual es : C$ %0.2f",Balance);
                 Amount_Entered = 0;
                 getch();
             }else if (Amount_Entered <= 0)
             {
                 clrscr();
                 printf("La cantidad a recargar es negativa o nula\n");
-                printf("Su saldo actual es : C$ %d",Balance);
+                printf("Su saldo actual es : C$ %0.2f",Balance);
                 Amount_Entered = 0;
                 getch();
             }else
