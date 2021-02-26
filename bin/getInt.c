@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 int bool = 0;
+
 typedef char *string;
 
 int get_int(string message,int x,int y);
@@ -27,16 +29,16 @@ int get_int(string message,int x, int y)
     char hold_intiger[6];
     fflush(stdin);
     textcolor(WHITE);
-    gotoxy(x,y);
+    /*gotoxy(x,y);
     clreol();
-    cprintf("%s", message);
+    cprintf("%s", message);*/
 
-    /*if (bool==0)
+    if (bool==0)
     {
        gotoxy(x,y);
        clreol();
        cprintf("%s", message);
-    }*/
+    }
    
     /*---------------Ciclo infinito------------*/
    
@@ -84,7 +86,6 @@ int get_int(string message,int x, int y)
         {
             max = 5;
         }
-
     }
     /*Fuera del ciclo preguntamos*/
     intiger = atol(hold_intiger);

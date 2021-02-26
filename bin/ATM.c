@@ -25,8 +25,8 @@ void Exit_Option(void);
 void Presentation(void);
 void Recargas(void);
 void ATM(void);
-void Remove_Cursor(int x, int y);
 void Frame(int lineas);
+void Date(int x1, int y1, int x2, int y2, int FirstColor, int SecondColor);
 
 int RemainingAttemps = 3;
 float Balance = 0, Dolar_Value = 35.07;
@@ -198,6 +198,7 @@ void Presentation(void)
     char *Presentation_Complements[] = {"Luis Joseph","26/02/2021", "2M1-CO", "Alejandro Ortiz - Aliz","Ing. Computacion","\0"};
 
     clrscr();
+    
     Frame(2);
     textcolor(BLUE);
     gotoxy(20,4);
@@ -223,6 +224,8 @@ void ATM(void)
     int i,opt,t = 0,option = 1, ex = 0;
     int Deposit = 0, Retirement = 0, PosY[4] = {10,12,14,16};
     char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"}, M;
+
+    /*Date(55,25,58,23,4,6);*/
 
     do
     {
@@ -323,21 +326,55 @@ void ATM(void)
             clrscr();
             textcolor(BLUE);
             cprintf("No tiene saldo en la cuenta");
+        }else if ( Balance < 50)
+        {
+            clrscr();
+            textcolor(BLUE);
+            cprintf("No tiene saldo suficiente para retirar\n");
+            cprintf("El saldo minimo a retirar es C$ 50  o  $1\n");
+            cprintf("Su saldo actual es C$ %0.2f",Balance);
         }else
         {
-            do 
+            do
             {
                 clrscr();
-                fflush(stdin);
-                textcolor(BLUE);
-                printf("Digite la cantidad a Retirar\n");
-                printf("C$ ");
-                scanf("%d", &Retirement);
-			}while (Retirement <= 0 || Retirement > Balance);
+                printf("Elija la moneda a retirar\n\n");
+                printf("C-Cordobas        D-Dolares\n\n");
+                scanf("%s",&M);
+            }while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
 
-            Balance = Balance - Retirement;
+            if (strcmp(M,'D')==0 || strcmp(M,'d')==0)
+            {
+                do
+                {
+                    clrscr();      
+                    printf("Digite la cantidad a retirar en Dolares ($) netos\n");
+                    printf("$ ");
+                    scanf("%d", &Retirement);
+                }while (Retirement <= 0 || Retirement > 2000 || Retirement > (Balance / Dolar_Value));
 
-            cprintf("\nSe ha retirado correctamente la cantidad de C$ %d netos",Retirement);
+                Balance = Balance - (Retirement * Dolar_Value);
+
+                textcolor(WHITE);
+                cprintf("\nSe ha retirado correctamente la cantidad de $ %d netos",Retirement);
+                printf("\n\nCambio Actual del Dolar a Cordobas : %0.2f",Dolar_Value);
+            }
+
+            if (strcmp(M,'C')==0 || strcmp(M,'c')==0)
+            {
+                do
+                {
+                    clrscr();      
+                    printf("Digite la cantidad a retirar en cordobas (C$) netos\n");
+                    printf("C$ ");
+                    scanf("%d", &Retirement);
+                }while (Retirement <= 0 || Retirement > 30000 || Retirement > Balance);
+
+                Balance = Balance - Retirement;
+
+                textcolor(WHITE);
+                cprintf("\nSe ha retirado correctamente la cantidad de C$ %d netos",Retirement);
+            }
         }
         getch();
         ATM();
@@ -345,7 +382,8 @@ void ATM(void)
     case 3:
         clrscr();
         textcolor(BLUE);
-        cprintf("Su saldo es C$ %0.2f", Balance);
+        cprintf("Su saldo es C$ %0.2f\n\n", Balance);
+        printf("Cambio Actual del Dolar a Cordobas : %0.2f",Dolar_Value);
         getch();
         ATM();
         break;
@@ -434,25 +472,19 @@ void Exit_Option(void)
     printf("Hacer su transaccion aqui es seguro, rapido y sencillo\n");
     printf("Le esperamos nuevamente :D "),
     getch();
+    exit(-1);
 }
 
 void Exit(void)
 {
     clrscr();
-    printf("Ha agotado sus 3 intentos\n\n");
+    printf("Ha agotado sus 3 intentos \n\n");
     printf("-------------------------\n\n");
     printf("Estimado Usuario : %s\n\n",assigned.user);
     printf("Su cuenta sera bloqueada por 24 horas por motivos de seguridad\n\n");
     printf("Gracias por su comprension");
     getch();
-}
-
-void Remove_Cursor(int x, int y)
-{
-    textcolor(BLACK);
-    gotoxy(x,y);
-    cprintf("%c",blok);
-    gotoxy(x,y);
+    exit(-1);
 }
 
 void Frame(int lineas)
@@ -496,6 +528,38 @@ void Frame(int lineas)
             
             gotoxy(79,i);
             cprintf("%c",lineaV);
+        }
+    }
+}
+
+void Date(int x1, int y1, int x2, int y2, int FirstColor, int SecondColor)
+{
+    struct date d;
+    struct time t;
+    int ejm = 0;
+
+    while (ejm < 60)
+    {
+        gettime(&t);
+        getdate(&d);
+
+        clrscr();
+
+        gotoxy(x1, y1);
+        textcolor(FirstColor);
+        cprintf("Fecha : %d / %02d / %d \n", d.da_day, d.da_mon,d.da_year);
+
+        gotoxy(x2,y2);
+        textcolor(SecondColor);
+        cprintf("Hora : %d: %d: %d", t.ti_hour, t.ti_min, t.ti_sec);
+
+        ejm = t.ti_sec;
+
+        sleep(1);
+
+        if (ejm == 59)
+        {
+            ejm = 0;
         }
     }
 }
