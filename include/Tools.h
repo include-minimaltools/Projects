@@ -54,16 +54,7 @@ void get_string(string message, string result)
     int letter = 0;
     char temp_string[80]={'\0'};
 
-    cprintf("%s", message);
-    if(strcmp(message,'\0')==0)
-    {
-        textcolor(WHITE);
-        clrscr();
-        cprintf("Error: Debe pasar un parametro a la funcion _getstring()");
-        getch();
-        exit(-1);
-    }
-        
+    cprintf("%s", message); 
         
     while (letter < MaxStrLn)
     {
