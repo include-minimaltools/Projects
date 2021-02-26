@@ -474,7 +474,7 @@ void Exit_Option(void)
 void Exit(void)
 {
     clrscr();
-    printf("Ha agotado sus 3 intentos\n\n");
+    printf("Ha agotado sus 3 intentos \n\n");
     printf("-------------------------\n\n");
     printf("Estimado Usuario : %s\n\n",assigned.user);
     printf("Su cuenta sera bloqueada por 24 horas por motivos de seguridad\n\n");
