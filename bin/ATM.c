@@ -323,21 +323,55 @@ void ATM(void)
             clrscr();
             textcolor(BLUE);
             cprintf("No tiene saldo en la cuenta");
+        }else if ( Balance < 50)
+        {
+            clrscr();
+            textcolor(BLUE);
+            cprintf("No tiene saldo suficiente para retirar\n");
+            cprintf("El saldo minimo a retirar es C$ 50  o  $1\n");
+            cprintf("Su saldo actual es C$ %0.2f",Balance);
         }else
         {
-            do 
+            do
             {
                 clrscr();
-                fflush(stdin);
-                textcolor(BLUE);
-                printf("Digite la cantidad a Retirar\n");
-                printf("C$ ");
-                scanf("%d", &Retirement);
-			}while (Retirement <= 0 || Retirement > Balance);
+                printf("Elija la moneda a retirar\n\n");
+                printf("C-Cordobas        D-Dolares\n\n");
+                scanf("%s",&M);
+            }while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
 
-            Balance = Balance - Retirement;
+            if (strcmp(M,'D')==0 || strcmp(M,'d')==0)
+            {
+                do
+                {
+                    clrscr();      
+                    printf("Digite la cantidad a retirar en Dolares ($) netos\n");
+                    printf("$ ");
+                    scanf("%d", &Retirement);
+                }while (Retirement <= 0 || Retirement > 2000 || Retirement > (Balance / Dolar_Value));
 
-            cprintf("\nSe ha retirado correctamente la cantidad de C$ %d netos",Retirement);
+                Balance = Balance - (Retirement * Dolar_Value);
+
+                textcolor(WHITE);
+                cprintf("\nSe ha retirado correctamente la cantidad de $ %d netos",Retirement);
+                printf("\n\nCambio Actual del Dolar a Cordobas : %0.2f",Dolar_Value);
+            }
+
+            if (strcmp(M,'C')==0 || strcmp(M,'c')==0)
+            {
+                do
+                {
+                    clrscr();      
+                    printf("Digite la cantidad a retirar en cordobas (C$) netos\n");
+                    printf("C$ ");
+                    scanf("%d", &Retirement);
+                }while (Retirement <= 0 || Retirement > 30000 || Retirement > Balance);
+
+                Balance = Balance - Retirement;
+
+                textcolor(WHITE);
+                cprintf("\nSe ha retirado correctamente la cantidad de C$ %d netos",Retirement);
+            }
         }
         getch();
         ATM();
@@ -345,7 +379,8 @@ void ATM(void)
     case 3:
         clrscr();
         textcolor(BLUE);
-        cprintf("Su saldo es C$ %0.2f", Balance);
+        cprintf("Su saldo es C$ %0.2f\n\n", Balance);
+        printf("Cambio Actual del Dolar a Cordobas : %0.2f",Dolar_Value);
         getch();
         ATM();
         break;
