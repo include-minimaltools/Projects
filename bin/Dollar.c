@@ -14,7 +14,7 @@ void main()
     n = Dollar_Value();
     printf("%f",n);
     
-    Date(20,10,20,20,4,6);
+    /*Date(20,10,20,20,4,6);*/
     getch();
 }
 

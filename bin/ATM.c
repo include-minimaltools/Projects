@@ -225,7 +225,7 @@ void ATM(void)
     int Deposit = 0, Retirement = 0, PosY[4] = {10,12,14,16};
     char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"}, M;
 
-    Date(55,25,58,23,4,6);
+    /*Date(55,25,58,23,4,6);*/
 
     do
     {
