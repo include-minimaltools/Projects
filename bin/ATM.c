@@ -501,15 +501,24 @@ void Recargas(void)
 
     if (Balance == 0 || Balance < 10)
     {
-        textcolor(BLUE);
         clrscr();
+        Frame(1);
+
+        textcolor(BLUE);
+        gotoxy(20,13);
         cprintf("No tiene saldo en la cuenta o es menor a C$ 10");
+
         getch();
     }else
     {
         clrscr();
+        Frame(1);
         fflush(stdin);
-        printf("Ingrese su numero telefonico\n");
+        textcolor(RED);
+        gotoxy(20,11);
+        cprintf("Ingrese su numero telefonico");
+
+        gotoxy(20,13);
         scanf("%ld",&CellPhone_Number);
 
         Four_Numbers = CellPhone_Number / 10000;
@@ -517,16 +526,22 @@ void Recargas(void)
         if (Four_Numbers > 5500 && Four_Numbers < 5999)
         {
             strcpy(Company,"Claro");
-            printf("Su numero %ld es %s",CellPhone_Number,Company);
+            textcolor(BLUE);
+            gotoxy(20,17);
+            cprintf("Su numero %ld es %s",CellPhone_Number,Company);
             getch();
         }else if (Four_Numbers > 7700 && Four_Numbers < 8700)
         {
             strcpy(Company,"Tigo");
-            printf("Su numero %ld es %s",CellPhone_Number,Company);
+            textcolor(BLUE);
+            gotoxy(20,17);
+            cprintf("Su numero %ld es %s",CellPhone_Number,Company);
             getch();
         }else
         {
-            printf("\nNumero no encontrado");
+            textcolor(BLUE);
+            gotoxy(20,17);
+            cprintf("Numero no encontrado");
             getch();
             Recargas();
         }
@@ -534,36 +549,66 @@ void Recargas(void)
         while(Amount_Entered == 0 || Amount_Entered < 10)
         {
             clrscr();
+            Frame(1);
             fflush(stdin);
-            printf("Ingrese la cantidad a recargar\n");
-            printf("C$ ");
+
+            textcolor(RED);
+            gotoxy(20,11);
+            cprintf("Ingrese la cantidad a recargar");
+
+            gotoxy(20,13);
+            cprintf("C$ ");
+
+            gotoxy(23,13);
             scanf("%d",&Amount_Entered);
 
             if (Amount_Entered > Balance)
             {
                 clrscr();
-                printf("La cantidad a recargar supera el saldo actual\n");
-                printf("Su saldo actual es : C$ %0.2f",Balance);
+                Frame(1);
+                textcolor(BLUE);
+                gotoxy(20,11);
+                cprintf("La cantidad a recargar supera el saldo actual");
+
+                gotoxy(20,13);
+                cprintf("Su saldo actual es : C$ %0.2f",Balance);
                 Amount_Entered = 0;
                 getch();
             }else if (Amount_Entered <= 0)
             {
                 clrscr();
-                printf("La cantidad a recargar es negativa o nula\n");
-                printf("Su saldo actual es : C$ %0.2f",Balance);
+                Frame(1);
+                textcolor(BLUE);
+                gotoxy(20,11);
+                cprintf("La cantidad a recargar es negativa o nula");
+
+                textcolor(BLUE);
+                gotoxy(20,13);
+                cprintf("Su saldo actual es : C$ %0.2f",Balance);
                 Amount_Entered = 0;
                 getch();
             }else if (Amount_Entered < 10 && Amount_Entered > 0)
             {
                 clrscr();
-                printf("La cantidad a recargar es menor a C$ 10\n");
-                printf("Su saldo actual es : C$ %0.2f",Balance);
+                Frame(1);
+                textcolor(BLUE);
+                gotoxy(20,11);
+                cprintf("La cantidad a recargar es menor a C$ 10");
+
+                textcolor(BLUE);
+                gotoxy(20,13);
+                cprintf("Su saldo actual es : C$ %0.2f",Balance);
                 Amount_Entered = 0;
                 getch();
             }else
             {
                 Balance = Balance - Amount_Entered;
-                printf("\nSe ha realizado la recarga con exito de C$ %d al numero %li de la compa%cia %s",Amount_Entered,CellPhone_Number,enye,Company);
+                textcolor(DARKGRAY);
+                gotoxy(20,16);
+                cprintf("Se ha realizado la recarga con exito de C$ %d",Amount_Entered);
+
+                gotoxy(20,18);
+                cprintf("al numero %li de la compa%cia %s",CellPhone_Number,enye,Company);
                 getch();
             }
         }
@@ -574,6 +619,8 @@ void Recargas(void)
 void Exit_Option(void)
 {
     clrscr();
+    Frame(2);
+
     textcolor(2);
     gotoxy(30,11);
     cprintf("Fue un placer atenderle...");
@@ -593,6 +640,8 @@ void Exit_Option(void)
 void Exit(void)
 {
     clrscr();
+    Frame(2);
+    
     textcolor(BLUE);
     gotoxy(30,11);
     cprintf("Ha agotado sus 3 intentos");
