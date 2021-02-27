@@ -13,8 +13,8 @@ void main()
     float n;
     n = Dollar_Value();
     printf("%f",n);
-    
-    /*Date(20,10,20,20,4,6);*/
+
+	/*Date(20,10,20,20,4,6);*/
     getch();
 }
 
@@ -22,7 +22,7 @@ float Dollar_Value(void)
 {
     float Fixed_Dollar = 34.9380, NewPrice_Dollar = 0;
     float Monthly_Rise = 0.0795, Annual_Rise = 0.9541;
-	int Fixed_Month = 2, Fixed_Year = 2021, i = 0
+	int Fixed_Month = 2, Fixed_Year = 2021;
     int Current_Month = 0, Current_Year = 0, Month_Difference = 0, Year_Difference = 0;
 
     struct date d;
@@ -45,10 +45,9 @@ float Dollar_Value(void)
         Year_Difference = Current_Year - Fixed_Year;
         Month_Difference = Current_Month - Fixed_Month;
         NewPrice_Dollar = Fixed_Dollar + (Annual_Rise * Year_Difference) + (Monthly_Rise * Month_Difference);
-        getch();
     }else
     {
-        printf("Su anio o mes es anterior al de nuestra base de datos");
+        NewPrice_Dollar = 0;
     }
 
     return NewPrice_Dollar;
