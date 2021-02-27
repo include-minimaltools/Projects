@@ -25,8 +25,8 @@ void Exit_Option(void);
 void Presentation(void);
 void Recargas(void);
 void ATM(void);
-void Remove_Cursor(int x, int y);
 void Frame(int lineas);
+void Date(int x1, int y1, int x2, int y2, int FirstColor, int SecondColor);
 
 int RemainingAttemps = 3;
 float Balance = 0, Dolar_Value = 35.07;
@@ -198,6 +198,7 @@ void Presentation(void)
     char *Presentation_Complements[] = {"Luis Joseph","26/02/2021", "2M1-CO", "Alejandro Ortiz - Aliz","Ing. Computacion","\0"};
 
     clrscr();
+    
     Frame(2);
     textcolor(BLUE);
     gotoxy(20,4);
@@ -223,6 +224,8 @@ void ATM(void)
     int i,opt,t = 0,option = 1, ex = 0;
     int Deposit = 0, Retirement = 0, PosY[4] = {10,12,14,16};
     char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"}, M;
+
+    Date(55,25,58,23,4,6);
 
     do
     {
@@ -469,6 +472,7 @@ void Exit_Option(void)
     printf("Hacer su transaccion aqui es seguro, rapido y sencillo\n");
     printf("Le esperamos nuevamente :D "),
     getch();
+    exit(-1);
 }
 
 void Exit(void)
@@ -480,14 +484,7 @@ void Exit(void)
     printf("Su cuenta sera bloqueada por 24 horas por motivos de seguridad\n\n");
     printf("Gracias por su comprension");
     getch();
-}
-
-void Remove_Cursor(int x, int y)
-{
-    textcolor(BLACK);
-    gotoxy(x,y);
-    cprintf("%c",blok);
-    gotoxy(x,y);
+    exit(-1);
 }
 
 void Frame(int lineas)
@@ -531,6 +528,38 @@ void Frame(int lineas)
             
             gotoxy(79,i);
             cprintf("%c",lineaV);
+        }
+    }
+}
+
+void Date(int x1, int y1, int x2, int y2, int FirstColor, int SecondColor)
+{
+    struct date d;
+    struct time t;
+    int ejm = 0;
+
+    while (ejm < 60)
+    {
+        gettime(&t);
+        getdate(&d);
+
+        clrscr();
+
+        gotoxy(x1, y1);
+        textcolor(FirstColor);
+        cprintf("Fecha : %d / %02d / %d \n", d.da_day, d.da_mon,d.da_year);
+
+        gotoxy(x2,y2);
+        textcolor(SecondColor);
+        cprintf("Hora : %d: %d: %d", t.ti_hour, t.ti_min, t.ti_sec);
+
+        ejm = t.ti_sec;
+
+        sleep(1);
+
+        if (ejm == 59)
+        {
+            ejm = 0;
         }
     }
 }
