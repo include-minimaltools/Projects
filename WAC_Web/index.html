@@ -11,10 +11,10 @@
 <body>
     <header>
         <nav>
-            <a href="#">Inicio </a>
-            <a href="#">Acerca de </a>
-            <a href="#">Ayuda </a>
-            <a href="#">Descargas</a>
+            <a href="#WAC">Inicio</a>
+            <a href="#Caracteristicas">Caracteristicas</a>
+            <a href="#Formularios">Formularios</a>
+            <a href="#Instaladores">Instaladores</a>
         </nav>
         <section class="textos-header">
             <h1>Potencia tu conocimiento en lenguaje c</h1>
@@ -23,64 +23,83 @@
         <div class="wave" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C255.36,150.48 343.95,-35.03 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
     </header>
     <main>
+        <section class="Sobre WAC">
+            <a name="WAC" /a>
+            <div class="contenedor">
+                <h2 class="titulo">¿Que es WAC?</h2>
+                <div class="galeria-sobre-wac">
+                    <div class="imagen-sobre-wac">
+                        <img src="img/Pag1.png" alt="">
+                    </div>
+                    <div class="textos">
+                        <p></p>
+                        <p>Windows C Assistant es un asistente para la creación de formularios y un entorno virtual gráfico en MS-DOS mediante el cual se pretende simular una versión reciente del sistema operativo de WINDOWS 10, también funciona como instalador de la máquina virtual que simula MS-DOS "DOSBOX" y del lenguaje de programación utilizado 'Turbo C 2.0', además anexa la funcionalidad de instalar un editor de texto de Microsoft llamado Visual Studio Code.</p>
+                    </div>
+                </div>
+        </section>
         <section class="content-sobre-wac">
+            <a name="Caracteristicas" /a>
             <h2 class="titulo">Caracteristicas</h2>
             <div class="contenedor-sobre-wac">
-                <img src="img/ilustracion2.svg" alt="" class="imagen-caracteristicas">
+                <img src="img/Form.svg" alt="" class="imagen-caracteristicas">
                 <div class="contenido-textos">
-                    <h3><span>1</span>Informacion General</h3>
-                    <p>Windows C Assistant es un asistente para la creación de formularios y un entorno virtual gráfico en MS-DOS mediante el cual se pretende simular una versión reciente del sistema operativo de WINDOWS 10, también funciona como instalador de la máquina virtual que simula MS-DOS "DOSBOX" y del lenguaje de programación utilizado 'Turbo C 2.0', además anexa la funcionalidad de instalar un editor de texto de Microsoft llamado Visual Studio Code.</p>
-                    <h3><span>2</span>Creacion de Formularios</h3>
+                    <h3><span>1</span>Creacion de Formularios</h3>
                     <p>Para la creación de formularios, WCA te generará un archivo C (.c) el cual te guardará en la carpeta BIN de tu directorio, este archivo tendrá un código de preestablecido para poder visualizar en el modo gráfico un "Form" parecido al ya visto en Visual Studio con Visual Basic y C#, esto pretende ahorrar tiempo al programador al comenzar a realizar un proyecto y que se centre en las funcionalidades que formarán parte del formulario y no en las virtudes básicas.</p>
-                    <h3><span>3</span>Funcion Principal</h3>
+                    <h3><span>2</span>Funcion Principal</h3>
                     <p>La principal función de WCA es generar un archivo C (.c) con el cual se pueda ejecutar una simulación básica del sistema operativo Windows 10 con la finalidad de que se puedan anexar programas al sistema con funcionalidades separadas.</p>
-                    <h3><span>4</span>Otras Funciones</h3>
+                    <h3><span>3</span>Otras Funciones</h3>
                     <p>Windows C Assisstant trabaja en conjunto a los programas antes mencionado para facilitar la programación en el lenguaje de Turbo C 2.0, aunque se sabe de que seguirá siendo aparatosa. WCA abrirá diversos programas puestos en tu carpeta de BIN directamente en DOSBOX sin necesidad de estar buscando el archivo dentro del Entorno de Turbo C y te dará la opción de abrir dicho código en Visual Studio Code.</p>
                 </div>
             </div>
         </section>
-        <section class="Sobre WAC">
+        <section class="creacion-Formularios">
+            <a name="Formularios" /a>
             <div class="contenedor">
-                <h2 class="titulo">Informacion sobre WAC</h2>
-                <div class="galeria-sobre-wac">
-                    <div class="imagen-sobre-wac">
-                        <img src="img/il2.png" alt="">
+                <h2 class="titulo">Creacion de Formularios</h2>
+                <div class="Sobre-Forms">
+                    <div class="imagen-sobre-forms">
+                        <img src="img/Formularios.png" alt="">
+                    </div>
+                    <div class="Info">
+                        <p></p>
+                        <p>En la opcion de crear nuevo formulario en c encontraremos varios elementos importantes como lo son: Ingresar nombre del formulario, titulo del formulario, tamaño y el color que llevara. Estas opciones no pueden quedar vacias porque no se ejecutaria correctamente el archivo. Tambien tenemos la opcion de crear tanto un archivo .c como un archivo de extension .h</p>
+                        <p></p>
+                        <p>En dado caso se quiera generar un archivo .h se eliminarán ciertas funcionalidades y se introducirá en la carpeta de "Include", permitiendo así que en archivo Windows.c se ejecute con una simple función, habiendo claro, incluido la librería.
+                        </p>
                     </div>
                 </div>
         </section>
-        <!--<section class="contenedor-criticas">
-            <h2 class="titulo">Comentarios</h2>
-            <div class="cards">
-                <div class="card">
-                    <img src="img/face1.jpg" alt="">
-                    <div class="contenido-texto-cards">
-                        <h4>Name</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, cupiditate!</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="img/face2.jpg" alt="">
-                    <div class="contenido-texto-cards">
-                        <h4>Name</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, cupiditate!</p>
-                    </div>
+        <section class="content-sobre-wac">
+            <a name="Instaladores" /a>
+            <h2 class="titulo">Instaladores</h2>
+            <div class="contenedor-sobre-wac">
+                <img src="img/Pag2.png" alt="" class="imagen-caracteristicas">
+                <div class="contenido-textos">
+                    <h3><span>*</span>Visual Studio Code</h3>
+                    <p>Hola</p>
+                    <h3><span>*</span>Dosbox y Turbo c 2.0</h3>
+                    <p>Hola Mundo</p>
                 </div>
             </div>
-        </section>-->
+        </section>
     </main>
     <footer>
         <div class="contenedor-footer">
             <div class="content-foo">
-                <h4>Phone</h4>
-                <p>Me lo Robaron</p>
+                <h4>Telefono</h4>
+                <p>8114 - 9879</p>
             </div>
             <div class="content-foo">
                 <h4>Email</h4>
-                <p>Otro dia perro</p>
+                <p>hscanimastool@gmail.com</p>
             </div>
             <div class="content-foo">
                 <h4>Universidad</h4>
-                <p>UNI - Universidad Nacional de Ingenieria</p>
+                <p>Universidad Nacional de Ingenieria</p>
+            </div>
+            <div class="content-foo">
+                <h4>Marca</h4>
+                <p>HSC - Minimal Tools</p>
             </div>
         </div>
         <h2 class="titulo-final">&copy; Gabriel A. Ortiz</h2>
