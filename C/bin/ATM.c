@@ -40,11 +40,12 @@ void main()
 {
     assigned.user = "luis";
     assigned.password = "2602";
-	CurrentDolar_Value = Dollar_Value();
+    CurrentDolar_Value = Dollar_Value();
     if (CurrentDolar_Value == 0)
     {
         isActive = false;
-    }else
+    }
+    else
     {
         isActive = true;
     }
@@ -74,14 +75,14 @@ void Start(void)
         MinStrLn = 2;
         MaxStrLn = 7;
         isPassword = false;
-        get_string("Usuario: ",c1.user);
-        
+        get_string("Usuario: ", c1.user);
+
         textcolor(BLUE);
         gotoxy(32, 14);
         MinStrLn = 3;
         MaxStrLn = 6;
         isPassword = true;
-        get_string("Contra: ",c1.password);
+        get_string("Contra: ", c1.password);
 
         if (strcmp(c1.user, assigned.user) == 0 && strcmp(c1.password, assigned.password) == 0)
         {
@@ -127,14 +128,13 @@ void Start(void)
             Start();
         }
     }
-    
 }
 
 void Menu(void)
 {
     int i, opc, tecla = 0, option = 1, exit = 0;
     char *menu_options[] = {"Presentacion", "Cajero ATM-UNI", "Recargas Tigo-Claro", "Salir", "\0"};
-    int PosY[4] = {10,12,14,16};
+    int PosY[4] = {10, 12, 14, 16};
 
     do
     {
@@ -142,20 +142,20 @@ void Menu(void)
         Frame(1);
 
         textcolor(RED);
-        gotoxy(5,3);
-        cprintf("Usuario : %s",assigned.user);
-        gotoxy(5,4);
-        cprintf("Saldo : C$ %0.2f",Balance);
+        gotoxy(5, 3);
+        cprintf("Usuario : %s", assigned.user);
+        gotoxy(5, 4);
+        cprintf("Saldo : C$ %0.2f", Balance);
 
-		textcolor(BLUE);
-        gotoxy(30,7);
+        textcolor(BLUE);
+        gotoxy(30, 7);
         cprintf("MENU PRINCIPAL");
 
         for (i = 0; i < 4; i++)
         {
-            textcolor(3+i);
+            textcolor(3 + i);
             gotoxy(28, PosY[i]);
-            cprintf("%c %s",i+1 == option ? 16 : 0, menu_options[i]);
+            cprintf("%c %s", i + 1 == option ? 16 : 0, menu_options[i]);
         }
 
         do
@@ -165,20 +165,20 @@ void Menu(void)
 
         switch (tecla)
         {
-            case up:
-                option--;
-                if (option < 1) 
-                    option = 4;
-                break;
-            case down:
-                option++;
-                if (option > 4) 
-                    option = 1;
-                break;
-            case enter:
-                exit = 1;
-            default:
-                break;
+        case up:
+            option--;
+            if (option < 1)
+                option = 4;
+            break;
+        case down:
+            option++;
+            if (option > 4)
+                option = 1;
+            break;
+        case enter:
+            exit = 1;
+        default:
+            break;
         }
     } while (exit == 0);
 
@@ -205,25 +205,25 @@ void Menu(void)
 
 void Presentation(void)
 {
-    int i,j = 0;
-    char *Presentation_Elements[] = {"NOMBRE  :", "FECHA   :", "GRUPO   :", "PROFE   :", "CARRERA :","\0"};
-    char *Presentation_Complements[] = {"Luis Joseph","26/02/2021", "2M1-CO", "Alejandro Ortiz - Aliz","Ing. Computacion","\0"};
+    int i, j = 0;
+    char *Presentation_Elements[] = {"NOMBRE  :", "FECHA   :", "GRUPO   :", "PROFE   :", "CARRERA :", "\0"};
+    char *Presentation_Complements[] = {"Luis Joseph", "26/02/2021", "2M1-CO", "Alejandro Ortiz - Aliz", "Ing. Computacion", "\0"};
 
     clrscr();
-    
+
     Frame(2);
     textcolor(BLUE);
-    gotoxy(20,4);
+    gotoxy(20, 4);
     cprintf("UNIVERSIDAD NACIONAL DE INGENIERIA - UNI");
 
     for (i = 0; i < 5; i++)
     {
         textcolor(BLUE);
         gotoxy(25, 8 + j);
-        cprintf("%s",Presentation_Elements[i]);
+        cprintf("%s", Presentation_Elements[i]);
         textcolor(CYAN);
         gotoxy(35, 8 + j);
-        cprintf("%s",Presentation_Complements[i]);
+        cprintf("%s", Presentation_Complements[i]);
         j = j + 3;
     }
 
@@ -233,9 +233,9 @@ void Presentation(void)
 
 void ATM(void)
 {
-    int i,opt,t = 0,option = 1, ex = 0;
-    int Deposit = 0, Retirement = 0, PosY[4] = {10,12,14,16};
-    char *Options[] = {"Ingresar Saldo","Retirar Saldo","Consultar Saldo","Atras","\0"}, M;
+    int i, opt, t = 0, option = 1, ex = 0;
+    int Deposit = 0, Retirement = 0, PosY[4] = {10, 12, 14, 16};
+    char *Options[] = {"Ingresar Saldo", "Retirar Saldo", "Consultar Saldo", "Atras", "\0"}, M;
 
     /*Date(55,25,58,23,4,6);*/
 
@@ -245,8 +245,8 @@ void ATM(void)
         Frame(1);
 
         textcolor(RED);
-        gotoxy(5,3);
-        cprintf("Usuario : %s",assigned.user);
+        gotoxy(5, 3);
+        cprintf("Usuario : %s", assigned.user);
 
         textcolor(4);
         gotoxy(28, 7);
@@ -254,21 +254,21 @@ void ATM(void)
 
         for (i = 0; i < 4; i++)
         {
-            textcolor(5+i);
+            textcolor(5 + i);
             gotoxy(28, PosY[i]);
-            cprintf("%c %s",i + 1 == option ? 16 : 0,Options[i]);
+            cprintf("%c %s", i + 1 == option ? 16 : 0, Options[i]);
         }
 
         do
         {
             t = getch();
         } while (t != up && t != down && t != enter);
-        
+
         switch (t)
         {
         case up:
             option--;
-            if (option < 1) 
+            if (option < 1)
                 option = 4;
             break;
         case down:
@@ -282,7 +282,7 @@ void ATM(void)
             break;
         }
     } while (ex == 0);
-    
+
     opt = option;
 
     switch (opt)
@@ -294,72 +294,73 @@ void ATM(void)
             Frame(1);
 
             textcolor(RED);
-            gotoxy(25,10);
+            gotoxy(25, 10);
             cprintf("Elija la moneda a depositar");
 
             textcolor(BLUE);
-            gotoxy(24,12);
+            gotoxy(24, 12);
             cprintf("C - Cordobas      D - Dolares");
 
             textcolor(GREEN);
-            gotoxy(35,14);
+            gotoxy(35, 14);
             cprintf("Letra: ");
 
-            gotoxy(42,14);
-            scanf("%s",&M);
+            gotoxy(42, 14);
+            scanf("%s", &M);
 
-        }while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
+        } while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
 
-        if (strcmp(M,'D')==0 || strcmp(M,'d')==0 && isActive == true)
+        if (strcmp(M, 'D') == 0 || strcmp(M, 'd') == 0 && isActive == true)
         {
             do
             {
-                clrscr();      
-                gotoxy(18,9);
+                clrscr();
+                gotoxy(18, 9);
                 textcolor(CYAN);
                 cprintf("Digite la cantidad a depositar en Dolares ($) netos");
-				gotoxy(39,11);
+                gotoxy(39, 11);
                 textcolor(BLUE);
                 cprintf("$ ");
-                gotoxy(41,11);
+                gotoxy(41, 11);
                 scanf("%d", &Deposit);
-			}while (Deposit <= 0 || Deposit > 2000);
+            } while (Deposit <= 0 || Deposit > 2000);
 
             Balance = Balance + (Deposit * CurrentDolar_Value);
 
-            gotoxy(14,14);
+            gotoxy(14, 14);
             textcolor(WHITE);
-            cprintf("Se ha depositado correctamente la cantidad de $ %d netos",Deposit);
+            cprintf("Se ha depositado correctamente la cantidad de $ %d netos", Deposit);
 
-            gotoxy(19,16);
+            gotoxy(19, 16);
             textcolor(DARKGRAY);
-            cprintf("Cambio Actual del Dolar a Cordobas : %f",CurrentDolar_Value);
-        }else if (isActive == false)
+            cprintf("Cambio Actual del Dolar a Cordobas : %f", CurrentDolar_Value);
+        }
+        else if (isActive == false)
         {
-            gotoxy(28,16);
+            gotoxy(28, 16);
             printf("Error en precio de dolar");
         }
 
-        if (strcmp(M,'C')==0 || strcmp(M,'c')==0)
+        if (strcmp(M, 'C') == 0 || strcmp(M, 'c') == 0)
         {
             do
             {
-                clrscr();      
-                gotoxy(18,9);
+                clrscr();
+                gotoxy(18, 9);
                 textcolor(CYAN);
                 cprintf("Digite la cantidad a depositar en cordobas (C$) netos");
-                gotoxy(38,11);
+                gotoxy(38, 11);
                 textcolor(BLUE);
                 cprintf("C$ ");
-                gotoxy(41,11);
+                gotoxy(41, 11);
                 scanf("%d", &Deposit);
-			}while (Deposit <= 0 || Deposit > 30000);
+            } while (Deposit <= 0 || Deposit > 30000);
 
             Balance = Balance + Deposit;
 
             textcolor(WHITE);
-            gotoxy(14,14);
-            cprintf("Se ha depositado correctamente la cantidad de C$ %d netos",Deposit);
+            gotoxy(14, 14);
+            cprintf("Se ha depositado correctamente la cantidad de C$ %d netos", Deposit);
         }
 
         getch();
@@ -371,99 +372,102 @@ void ATM(void)
             clrscr();
             Frame(1);
             textcolor(BLUE);
-            gotoxy(27,11);
+            gotoxy(27, 11);
             cprintf("No tiene saldo en la cuenta");
-            gotoxy(24,13);
+            gotoxy(24, 13);
             cprintf("Intente Ingresar saldo a su cuenta");
-        }else if ( Balance < 50 && Balance > 0)
+        }
+        else if (Balance < 50 && Balance > 0)
         {
             clrscr();
             Frame(1);
             textcolor(BLUE);
-            gotoxy(25,11);
+            gotoxy(25, 11);
             cprintf("No tiene saldo suficiente para retirar");
-            gotoxy(24,13);
+            gotoxy(24, 13);
             cprintf("El saldo minimo a retirar es C$ 50  o  $1");
-            gotoxy(27,15);
-            cprintf("Su saldo actual es C$ %0.2f",Balance);
-        }else
+            gotoxy(27, 15);
+            cprintf("Su saldo actual es C$ %0.2f", Balance);
+        }
+        else
         {
             do
             {
                 clrscr();
                 Frame(1);
                 textcolor(RED);
-                gotoxy(25,10);
+                gotoxy(25, 10);
                 cprintf("Elija la moneda a retirar\n\n");
 
                 textcolor(BLUE);
-                gotoxy(24,12);
+                gotoxy(24, 12);
                 cprintf("C - Cordobas      D - Dolares");
 
                 textcolor(GREEN);
-                gotoxy(35,14);
+                gotoxy(35, 14);
                 cprintf("Letra: ");
 
-                gotoxy(42,14);
-                scanf("%s",&M);
-            }while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
+                gotoxy(42, 14);
+                scanf("%s", &M);
+            } while (M != 'D' && M != 'd' && M != 'c' && M != 'C');
 
-			if (strcmp(M,'D')==0 || strcmp(M,'d')==0 && isActive == true)
+            if (strcmp(M, 'D') == 0 || strcmp(M, 'd') == 0 && isActive == true)
             {
                 do
                 {
-                    clrscr();     
-                    Frame(1); 
-                    gotoxy(18,9);
+                    clrscr();
+                    Frame(1);
+                    gotoxy(18, 9);
                     textcolor(CYAN);
                     cprintf("Digite la cantidad a retirar en Dolares ($) netos");
 
-                    gotoxy(39,11);
+                    gotoxy(39, 11);
                     textcolor(BLUE);
                     cprintf("$ ");
 
-					gotoxy(41,11);
+                    gotoxy(41, 11);
                     scanf("%d", &Retirement);
-				}while (Retirement <= 0 || Retirement > 2000 || Retirement > (Balance / CurrentDolar_Value));
+                } while (Retirement <= 0 || Retirement > 2000 || Retirement > (Balance / CurrentDolar_Value));
 
-				Balance = Balance - (Retirement * CurrentDolar_Value);
+                Balance = Balance - (Retirement * CurrentDolar_Value);
 
-                gotoxy(14,14);
+                gotoxy(14, 14);
                 textcolor(WHITE);
-                cprintf("Se ha retirado correctamente la cantidad de $ %d netos",Retirement);
+                cprintf("Se ha retirado correctamente la cantidad de $ %d netos", Retirement);
 
-                gotoxy(19,16);
+                gotoxy(19, 16);
                 textcolor(WHITE);
-				cprintf("Cambio Actual del Dolar a Cordobas : %f",CurrentDolar_Value);
-            }else if (isActive == false)
+                cprintf("Cambio Actual del Dolar a Cordobas : %f", CurrentDolar_Value);
+            }
+            else if (isActive == false)
             {
-                gotoxy(28,16);
+                gotoxy(28, 16);
                 printf("Error en precio de dolar");
             }
 
-            if (strcmp(M,'C')==0 || strcmp(M,'c')==0)
+            if (strcmp(M, 'C') == 0 || strcmp(M, 'c') == 0)
             {
                 do
                 {
-                    clrscr();  
+                    clrscr();
                     Frame(1);
-                    gotoxy(18,9);
-                    textcolor(CYAN);    
+                    gotoxy(18, 9);
+                    textcolor(CYAN);
                     cprintf("Digite la cantidad a retirar en cordobas (C$) netos\n");
 
-                    gotoxy(38,11);
+                    gotoxy(38, 11);
                     textcolor(BLUE);
                     cprintf("C$ ");
 
-                    gotoxy(41,11);
+                    gotoxy(41, 11);
                     scanf("%d", &Retirement);
-                }while (Retirement <= 0 || Retirement > 30000 || Retirement > Balance);
+                } while (Retirement <= 0 || Retirement > 30000 || Retirement > Balance);
 
                 Balance = Balance - Retirement;
 
                 textcolor(WHITE);
-                gotoxy(14,14);
-                cprintf("Se ha retirado correctamente la cantidad de C$ %d netos",Retirement);
+                gotoxy(14, 14);
+                cprintf("Se ha retirado correctamente la cantidad de C$ %d netos", Retirement);
             }
         }
         getch();
@@ -473,15 +477,15 @@ void ATM(void)
         clrscr();
         Frame(2);
         textcolor(RED);
-        gotoxy(36,9);
+        gotoxy(36, 9);
         cprintf("ATM - UNI");
 
         textcolor(BLUE);
-        gotoxy(30,11);
+        gotoxy(30, 11);
         cprintf("Su saldo es C$ %0.2f", Balance);
 
-        gotoxy(19,13);
-		cprintf("Cambio Actual del Dolar a Cordobas : %f",CurrentDolar_Value);
+        gotoxy(19, 13);
+        cprintf("Cambio Actual del Dolar a Cordobas : %f", CurrentDolar_Value);
 
         getch();
         ATM();
@@ -490,7 +494,8 @@ void ATM(void)
         Menu();
     default:
         break;
-    }}
+    }
+}
 
 void Recargas(void)
 {
@@ -505,110 +510,116 @@ void Recargas(void)
         Frame(1);
 
         textcolor(BLUE);
-        gotoxy(20,13);
+        gotoxy(20, 13);
         cprintf("No tiene saldo en la cuenta o es menor a C$ 10");
 
         getch();
-    }else
+    }
+    else
     {
         clrscr();
         Frame(1);
         fflush(stdin);
         textcolor(RED);
-        gotoxy(20,11);
+        gotoxy(20, 11);
         cprintf("Ingrese su numero telefonico");
 
-        gotoxy(20,13);
-        scanf("%ld",&CellPhone_Number);
+        gotoxy(20, 13);
+        scanf("%ld", &CellPhone_Number);
 
         Four_Numbers = CellPhone_Number / 10000;
 
         if (Four_Numbers > 5500 && Four_Numbers < 5999)
         {
-            strcpy(Company,"Claro");
+            strcpy(Company, "Claro");
             textcolor(BLUE);
-            gotoxy(20,17);
-            cprintf("Su numero %ld es %s",CellPhone_Number,Company);
+            gotoxy(20, 17);
+            cprintf("Su numero %ld es %s", CellPhone_Number, Company);
             getch();
-        }else if (Four_Numbers > 7700 && Four_Numbers < 8700)
+        }
+        else if (Four_Numbers > 7700 && Four_Numbers < 8700)
         {
-            strcpy(Company,"Tigo");
+            strcpy(Company, "Tigo");
             textcolor(BLUE);
-            gotoxy(20,17);
-            cprintf("Su numero %ld es %s",CellPhone_Number,Company);
+            gotoxy(20, 17);
+            cprintf("Su numero %ld es %s", CellPhone_Number, Company);
             getch();
-        }else
+        }
+        else
         {
             textcolor(BLUE);
-            gotoxy(20,17);
+            gotoxy(20, 17);
             cprintf("Numero no encontrado");
             getch();
             Recargas();
         }
 
-        while(Amount_Entered == 0 || Amount_Entered < 10)
+        while (Amount_Entered == 0 || Amount_Entered < 10)
         {
             clrscr();
             Frame(1);
             fflush(stdin);
 
             textcolor(RED);
-            gotoxy(20,11);
+            gotoxy(20, 11);
             cprintf("Ingrese la cantidad a recargar");
 
-            gotoxy(20,13);
+            gotoxy(20, 13);
             cprintf("C$ ");
 
-            gotoxy(23,13);
-            scanf("%d",&Amount_Entered);
+            gotoxy(23, 13);
+            scanf("%d", &Amount_Entered);
 
             if (Amount_Entered > Balance)
             {
                 clrscr();
                 Frame(1);
                 textcolor(BLUE);
-                gotoxy(20,11);
+                gotoxy(20, 11);
                 cprintf("La cantidad a recargar supera el saldo actual");
 
-                gotoxy(20,13);
-                cprintf("Su saldo actual es : C$ %0.2f",Balance);
+                gotoxy(20, 13);
+                cprintf("Su saldo actual es : C$ %0.2f", Balance);
                 Amount_Entered = 0;
                 getch();
-            }else if (Amount_Entered <= 0)
+            }
+            else if (Amount_Entered <= 0)
             {
                 clrscr();
                 Frame(1);
                 textcolor(BLUE);
-                gotoxy(20,11);
+                gotoxy(20, 11);
                 cprintf("La cantidad a recargar es negativa o nula");
 
                 textcolor(BLUE);
-                gotoxy(20,13);
-                cprintf("Su saldo actual es : C$ %0.2f",Balance);
+                gotoxy(20, 13);
+                cprintf("Su saldo actual es : C$ %0.2f", Balance);
                 Amount_Entered = 0;
                 getch();
-            }else if (Amount_Entered < 10 && Amount_Entered > 0)
+            }
+            else if (Amount_Entered < 10 && Amount_Entered > 0)
             {
                 clrscr();
                 Frame(1);
                 textcolor(BLUE);
-                gotoxy(20,11);
+                gotoxy(20, 11);
                 cprintf("La cantidad a recargar es menor a C$ 10");
 
                 textcolor(BLUE);
-                gotoxy(20,13);
-                cprintf("Su saldo actual es : C$ %0.2f",Balance);
+                gotoxy(20, 13);
+                cprintf("Su saldo actual es : C$ %0.2f", Balance);
                 Amount_Entered = 0;
                 getch();
-            }else
+            }
+            else
             {
                 Balance = Balance - Amount_Entered;
                 textcolor(DARKGRAY);
-                gotoxy(20,16);
-                cprintf("Se ha realizado la recarga con exito de C$ %d",Amount_Entered);
+                gotoxy(20, 16);
+                cprintf("Se ha realizado la recarga con exito de C$ %d", Amount_Entered);
 
-                gotoxy(20,18);
-                cprintf("al numero %li de la compa%cia %s",CellPhone_Number,enye,Company);
+                gotoxy(20, 18);
+                cprintf("al numero %li de la compa%cia %s", CellPhone_Number, enye, Company);
                 getch();
             }
         }
@@ -622,15 +633,15 @@ void Exit_Option(void)
     Frame(2);
 
     textcolor(2);
-    gotoxy(30,11);
+    gotoxy(30, 11);
     cprintf("Fue un placer atenderle...");
 
     textcolor(3);
-    gotoxy(19,13);
+    gotoxy(19, 13);
     cprintf("Hacer su transaccion aqui es seguro, rapido y sencillo");
 
     textcolor(4);
-    gotoxy(30,11);
+    gotoxy(30, 11);
     cprintf("Le esperamos nuevamente :D ");
 
     getch();
@@ -641,21 +652,21 @@ void Exit(void)
 {
     clrscr();
     Frame(2);
-    
+
     textcolor(BLUE);
-    gotoxy(30,11);
+    gotoxy(30, 11);
     cprintf("Ha agotado sus 3 intentos");
 
-    gotoxy(30,13);
+    gotoxy(30, 13);
     cprintf("-------------------------");
 
-    gotoxy(30,15);
-    cprintf("Estimado Usuario : %s",assigned.user);
+    gotoxy(30, 15);
+    cprintf("Estimado Usuario : %s", assigned.user);
 
-    gotoxy(30,17);
+    gotoxy(30, 17);
     cprintf("Su cuenta sera bloqueada por 24 horas por motivos de seguridad");
 
-	gotoxy(30,19);
+    gotoxy(30, 19);
     cprintf("Gracias por su comprension");
     getch();
     exit(-1);
@@ -664,9 +675,9 @@ void Exit(void)
 void Frame(int lineas)
 {
     int i;
-    char lineaH=196, lineaV=179, esquinaNW=218, esquinaNE=191, esquinaSW=192, esquinaSE=217;
+    char lineaH = 196, lineaV = 179, esquinaNW = 218, esquinaNE = 191, esquinaSW = 192, esquinaSE = 217;
 
-    if(lineas!=1)
+    if (lineas != 1)
     {
         lineaH = 205;
         lineaV = 286;
@@ -677,31 +688,31 @@ void Frame(int lineas)
     }
 
     textcolor(CYAN);
-    for(i=2;i<=79;i++)
+    for (i = 2; i <= 79; i++)
     {
-        gotoxy(i,1);
-        if(i!=2&&i!=79)
-            cprintf("%c",lineaH);
-        else if(i==2)
-            cprintf("%c",esquinaNW);
+        gotoxy(i, 1);
+        if (i != 2 && i != 79)
+            cprintf("%c", lineaH);
+        else if (i == 2)
+            cprintf("%c", esquinaNW);
         else
-            cprintf("%c",esquinaNE);
-        
-        gotoxy(i,25);
-        if(i!=2&&i!=79)
-            cprintf("%c",lineaH);
-        else if(i==2)
-            cprintf("%c",esquinaSW);
+            cprintf("%c", esquinaNE);
+
+        gotoxy(i, 25);
+        if (i != 2 && i != 79)
+            cprintf("%c", lineaH);
+        else if (i == 2)
+            cprintf("%c", esquinaSW);
         else
-            cprintf("%c",esquinaSE);
-        
-        if(i>=2&&i<=24)
+            cprintf("%c", esquinaSE);
+
+        if (i >= 2 && i <= 24)
         {
-            gotoxy(2,i);
-            cprintf("%c",lineaV);
-            
-            gotoxy(79,i);
-            cprintf("%c",lineaV);
+            gotoxy(2, i);
+            cprintf("%c", lineaV);
+
+            gotoxy(79, i);
+            cprintf("%c", lineaV);
         }
     }
 }
@@ -710,7 +721,7 @@ float Dollar_Value(void)
 {
     float Fixed_Dollar = 34.9380, NewPrice_Dollar = 0;
     float Monthly_Rise = 0.0795, Annual_Rise = 0.9541;
-	int Fixed_Month = 2, Fixed_Year = 2021;
+    int Fixed_Month = 2, Fixed_Year = 2021;
     int Current_Month = 0, Current_Year = 0, Month_Difference = 0, Year_Difference = 0;
 
     struct date d;
@@ -728,13 +739,15 @@ float Dollar_Value(void)
     {
         Month_Difference = Current_Month - Fixed_Month;
         NewPrice_Dollar = Fixed_Dollar + (Monthly_Rise * Month_Difference);
-    }else if (Current_Month >= Fixed_Month && Current_Year > Fixed_Year)
+    }
+    else if (Current_Month >= Fixed_Month && Current_Year > Fixed_Year)
     {
         Year_Difference = Current_Year - Fixed_Year;
         Month_Difference = Current_Month - Fixed_Month;
         NewPrice_Dollar = Fixed_Dollar + (Annual_Rise * Year_Difference) + (Monthly_Rise * Month_Difference);
         getch();
-    }else
+    }
+    else
     {
         NewPrice_Dollar = 0;
     }
